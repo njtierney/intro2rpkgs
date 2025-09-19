@@ -1,0 +1,21 @@
+# About this {-}
+
+This book is an **introduction to** creating an R package. It focusses on building an R package with 1-2 functions, the `praiseme` package (modelled on the [praise](https://cran.r-project.org/web/packages/praise/) package. 
+
+This book is a resource that will grow and change over time as a **living book**.
+
+After reading this book and doing the workshop, you should feel comfortable doing the following:
+
+- Create the basic structure of an R package.
+- Manage dependencies with [`usethis`](https://usethis.r-lib.org/) and [`devtools`](https://devtools.r-lib.org/).
+- Create documentation with [`roxygen2`](https://roxygen2.r-lib.org/).
+- Write and run unit tests with [`testthat`](https://testthat.r-lib.org/) to verify package functionality.
+- Use Git and GitHub to put your R package online.
+- Understand next steps for advanced package development, including:
+	- Automatically run tests with continuous integration via GitHub Actions.
+	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
+	- Create professional package websites using [`pkgdown`](https://pkgdown.r-lib.org/).
+
+## Licence
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
