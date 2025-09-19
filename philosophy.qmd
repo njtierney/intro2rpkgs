@@ -1,0 +1,65 @@
+# Philosophy
+
+An R package is a way for you to use the same code in many places. 
+
+This is a useful idea for you if you've got some code that you want to use in more than one project. For example, say you have a really nice way to plot some data, and a colleague wants to use that same plot design, but in their other project, how do you share the code?
+
+You could email it. But then, what if you find a bug in your code, because the plot didin't handle missing values. How do you share that code with your friend? Do you  send another email? What if this plot becomes really popular, and you've got say 10 people who want to use your code? You can see how this might become a problem. Maybe there's actually some other similar plots you want to share. And maybe there's a statistical method that goes along with this. They are all related. All similar.
+
+The solution, as I said above, is an R package:
+
+> An R package is a way for you to use the same code in many places. 
+
+It keeps all your code bundled (packaged, even) up in something that is easily transportable. 
+
+An analogy I like about this is from [Roger Peng](https://rdpeng.org/), who described an R package as being like a laundry basket. If I try and take my dirty laundry down the stairs in an apartment building to the laundry, I probably want something to hold it all in together. I don't really want to just bundle it up in my arms and go on a long journey down some stairs and through multiple doors. I'm almost certainly going to lose a sock, a shirt, or worse, a handkerchief. If don't manage to lose anything it's probably because I've been so focussed on keeping it all bundled together that I might have forgotten to bring my keys to let me back in, or some change to pay for the machine, because they still don't have a card machine. And then when it is done I need to take it back upstairs to hang out to dry in my apartment, and I've got the same problem, but now it's soggy clothing.
+
+The point is, my life would be easier here if I had something simple: a laundry basket. It keeps all my stuff together, it makes moving it from place to place much simpler, and it means I can put all my clothes in it, and not be worried I've dropped anything along the way.
+
+The R package is the laundry basket to put all your code in to take from place to place. If you want to use the same code in multiple places, the best way to do this is with an R package.
+
+So, I want to help you write an R package, and to do this, I am going to mimic the resource that helped me the most when I first started. This was Hilary Parker's blog post, ["Writing an R package from scratch"](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/).
+
+This focussed on creating a package, [`cats`](https://github.com/hilaryparker/cats), and a single function, `cat_function()`, which looked like the following:
+
+```{r}
+cat_function <- function(love=TRUE){
+  if(love==TRUE){
+    print("I love cats!")
+  }
+  else {
+    print("I am not a cool person.")
+  }
+}
+
+cat_function()
+```
+
+What I loved about this post was that it was so accessible. The example idea felt like a nice toy that encouraged exploration and iteration. I felt like I could do it. Plus, I like cats.
+
+So the idea with this book is to empower you in a similar way to make your own R package. We will do this by focussing on a really simple example: a function that delivers praise. It will look like this:
+
+```{r}
+praiseme <- function(){
+  "Hey, you're really great!"
+}
+
+praiseme()
+```
+
+We will go through the whole process of all the bits and pieces that sit around an R package: documentation, metadata (DESCRIPTION file), tests, checks, git, github, even a website.
+
+I know that `praiseme()` is a simple function, and while I think it would be great to teach a __really useful example__, where you would learn how to write __really useful functions you would use every day__. 
+
+I think this is not a bad idea, but I think it gets in the way of the main goal: learning how to write an R package.
+
+Writing good R code is a lifelong journey in the same way it is to become a good at any skill like writing or music. It takes practice and persistence. It also helps that we've got so many great people in the R community who help each other.
+
+So the idea with this book is to focus on a really simple example, so you can spend your energy on understanding the framework of an R package, and and less energy on understanding functions, and how they work.
+
+There are of course, many other resources on writing R packages. You should know about this, and you should probably read them. I did, and I've found them useful. Here are some of them:
+
+- ["R packages"](https://r-pkgs.org/). I consider the "R packages" book (now in its second edition, by Hadley Wickham and Jenny Bryan), to be the authority on best practices for package development
+- The rOpenSci guide, ["rOpenSci Packages: Development, Maintenance, and Peer Review"](https://devguide.ropensci.org/index.html). This is an excellent guide that is more advanced.
+
+Before we get started in earnest, we need to make sure we have things installed properly.
