@@ -1,0 +1,10 @@
+
+- Hadley Wickham
+- Jenny Bryan
+- Miles McBain
+- Joe Cheng
+- Di Cook
+- Rob Hyndman
+- Kerrie Mengersen
+- Damjan Vukcevic
+- Matt Moores

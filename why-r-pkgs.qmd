@@ -1,0 +1,83 @@
+# Why write an R package?
+
+An R package is a way for you to use the same code in many places. 
+
+This is really useful when you have code you have written in one project, that you want to use in another. It doesn't need to be useful to everyone, it can just be useful to you! A nice first R package could be a collection of useful R code you have written and use in multiple projects. My first R package was [{neato}](https://github.com/njtierney/neato),which contained some functions to help tidy up decision trees.
+
+The main benefit of an R package is that it provides this really portable way to share code.
+
+Imagine that you had a really nice way to plot some data. And now imagine that a colleague wants to use that same plot design, but in their other project, how do you share the code?
+
+You could email it, sure.
+
+But what do you do when you find a bug in your code, because the plot didn't handle missing values? How do you share that code with your friend? You could send another email.
+
+What if other people start to want to use your plot? Maybe there's actually some other similar plots you want to share. And maybe there's a statistical method that goes along with this. They are all related. All similar.
+
+The solution, as I said above, is an R package:
+
+> An R package is a way for you to use the same code in many places. 
+
+It keeps all your code bundled (packaged, even) up in something that is easily transportable. 
+
+## An R package is a laundry basket
+
+An analogy I like to think about for R packages is from [Roger Peng](https://rdpeng.org/), who described an R package as being like a laundry basket. 
+
+If I try and take my dirty laundry down the stairs in an apartment building to the laundry, I probably want something to hold it all in together. I don't really want to just bundle it up in my arms and go on a long journey down some stairs and through multiple doors. I'm almost certainly going to lose a sock, a shirt, or worse, a handkerchief. If don't manage to lose anything it's probably because I've been so focussed on keeping it all bundled together that I might have forgotten to bring my keys to let me back in, or some change to pay for the machine, because they still don't have a card machine. And then when it is done I need to take it back upstairs to hang out to dry in my apartment, and I've got the same problem, but now it's soggy clothing.
+
+The point is, my life would be easier here if I had something simple: a laundry basket. It keeps all my stuff together, it makes moving it from place to place much simpler, and it means I can put all my clothes in it, and not be worried I've dropped anything along the way.
+
+The R package is the laundry basket to put all your code in to take from place to place. If you want to use the same code in multiple places, the best way to do this is with an R package.
+
+## Our Approach: Keeping it simple with the {praiseme} package
+
+So, I want to help you write an R package, and to do this, I am going to mimic the resource that helped me the most when I first started. This was Hilary Parker's blog post, ["Writing an R package from scratch"](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/).
+
+This focussed on creating a package, [`cats`](https://github.com/hilaryparker/cats), and a single function, `cat_function()`, which looked like the following:
+
+```{r}
+cat_function <- function(love=TRUE){
+  if(love==TRUE){
+    print("I love cats!")
+  }
+  else {
+    print("I am not a cool person.")
+  }
+}
+
+cat_function()
+```
+
+What I loved about this post was that it was so accessible. The example idea encouraged exploration and iteration and I was confident I could do it. The simple idea dropped the barrier to entry, and there was no "You must be __this good__ at writing R code to enjoy this ride". 
+
+It felt like I could do it. Plus, I like cats.
+
+So the idea with this book is to empower you in a similar way to make your own R package. We will do this by focussing on a really simple example: a function that delivers praise. It will look like this:
+
+```{r}
+praiseme <- function(){
+  "Hey, you're really great!"
+}
+
+praiseme()
+```
+
+We will go through the whole process of all the bits and pieces that sit around an R package: documentation, metadata (DESCRIPTION file), tests, checks, git, github, even a website.
+
+I know `praiseme()` is a simple function, and while I think it would be great to teach a __really useful example__, where you would learn how to write __really useful functions you would use every day__. 
+
+I think this is not a bad idea, but I think it gets in the way of the main goal: learning how to write an R package.
+
+Writing good R code is a lifelong journey in the same way it is to become a good at any complex skill, like writing, or music. It takes practice and persistence. It also helps that we've got so many great people in the R community who help each other.
+
+So the idea with this book is to focus on a really simple example, so you can spend your energy on understanding the framework of an R package, and and less energy on understanding functions, and how they work.
+
+## Other Resources
+
+There are many other resources on writing R packages. They are good to know about, and I think they are worth your time. Here are some of them:
+
+- ["R packages"](https://r-pkgs.org/). I consider the "R packages" book (now in its second edition, by Hadley Wickham and Jenny Bryan), to be the authority on best practices for package development
+- The rOpenSci guide, ["rOpenSci Packages: Development, Maintenance, and Peer Review"](https://devguide.ropensci.org/index.html). This is an excellent guide that is more advanced.
+
+Before we get started in earnest, we need to make sure we have things installed properly.

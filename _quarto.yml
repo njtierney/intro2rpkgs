@@ -1,0 +1,82 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Introduction to R Packages"
+  author: "Nicholas Tierney"
+  description: |
+    Do you have R code you want to share? You can transform your R code into a shareable tool by developing it into an R package. This course bridges the gap between writing isolated R functions and creating documented packages that can be easily distributed, and is designed for those who might be curious about R package development but haven't had the time or guidance to get started. 
+    
+    You'll learn the essential tools of the trade: `usethis` and `devtools` for package structure, `roxygen2` for documentation, `testthat` for testing, and Git/GitHub for sharing your work.
+    
+    Whether you're looking to organise your personal code collection or contribute to the broader R ecosystem, this course provides the foundation you need.
+    
+    **Prerequisites**: 
+    - Comfortable with some R fundamentals (data types, functions, reading data).
+    - Experience writing basic R scripts.
+    - No prior experience with package development required.
+    
+    **Learning Outcomes**: By the end of this course, you will be able to:  
+    - Create the basic structure of an R package.
+    - Manage dependencies with `usethis` and `devtools`.
+    - Create documentation with `roxygen2`.
+    - Write and run unit tests with `testthat` to verify package functionality.
+    - Use Git and GitHub to put your R package online.
+    - Understand next steps for advanced package development, including:
+    	- Automatically run tests with continuous integration via GitHub Actions.
+    	- Make your R package easily installable with the [R Universe](https://r-universe    .dev/search).
+    	- Create professional package websites using `pkgdown`.
+  site-url: https://rpkg-intro.njtierney.com
+  repo-url: https://github.com/njtierney/rpkg-intro
+  repo-branch: main
+  repo-actions: [edit, issue]
+  # sharing: [twitter]
+  date: "2025-09-08"
+  page-footer: "Copyright 2025, Nicholas Tierney"
+  page-navigation: true
+  search: true
+  chapters:
+    - "index.qmd"
+    - "license.qmd"
+    - "why-r-pkgs.qmd"
+    - "installation.qmd"
+    - "rstudio.qmd"
+    - "workflow.qmd"
+    - "create-the-pkg.qmd" # needs substantial extra work
+    - "how-to-use-extra-pkgs.qmd" # lots of extra work
+    - "add-documentation.qmd" # lots of extra work
+    - "push-to-github.qmd" #
+    - "add-readme.qmd"
+    - "add-tests.qmd"
+    - "add-website.qmd"
+    - "add-ci.qmd"
+    - "publish.qmd" # on R universe
+    - "next-steps.qmd" # R-Packages book, rOpenSci, AI tools
+    - "references.qmd"
+    - "acknowledgements.qmd"
+  appendices:
+    - "appendix-faq.qmd"
+    - "common-problems.qmd"
+    - "keyboard-shortcuts.qmd"
+bibliography:
+  - book.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - rpkg-intro.scss
+    code-background: true
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+  pdf:
+    documentclass: krantz
+    keep-tex: true
+    cite-method: natbib
+execute:
+  freeze: false
+  # epub:
+  #   cover-image: cover.png
+

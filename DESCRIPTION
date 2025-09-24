@@ -1,0 +1,27 @@
+Package: rpkgintro
+Title: Book About Essentials of Writing R Packages
+Version: 0.0.0.9000
+Authors@R: 
+    person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+  broom,
+  devtools,
+  here,
+  knitr,
+  naniar,
+  palmerpenguins,
+  readr,
+  remotes,
+  rmarkdown,
+  spelling,
+  stringr,
+  tidyverse,
+  usethis,
+  visdat
