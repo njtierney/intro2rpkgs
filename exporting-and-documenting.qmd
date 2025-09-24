@@ -4,23 +4,100 @@ We've just tried to use our new `praise()` function, but it doesn't work!
 
 The reason is that we need to tell R to export it, so that it becomes available when we do:
 
-```r
+``` r
 library(praise)
 ```
 
 Now, you might have noticed that you can source, or run the code to get access to the function. But this is similar, but actually different to exporting the code.
 
-You can think of exporting like only running the code for very select parts of your package - and only making certain parts available to the user when they run `library(pkgname)`. 
+You can think of exporting like only running the code for very select parts of your package - and only making certain parts available to the user when they run `library(pkgname)`.
 
-Exporting is a special process in R, and we make our function available by _exporting it_.
+Exporting is a special process in R, and we make our function available by *exporting it* using `roxygen2`.
+
+In short, `roxygen2` provides us with nifty syntax to give documentation to our functions, which also allows them to be exported.
+
+Currently our code looks like this:
+
+``` r
+praise <- function() {
+  "Hey Nick, You're really awesome!"
+}
+```
+
+And we can add a "roxygen skeleton" by going to `code > insert roxygen skeleton` (or with Alt/Option + Ctrl/Cmd + Shift + R) whilst our cursor is in the function, and we get this:
+
+![](images/clipboard-3912445163.gif)
+
+``` r
+#' Title
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+praise <- function() {
+  "Hey Nick, You're really awesome!"
+}
+```
+
+You can think of roxygen as being like really special comments - notice that they are really similar to R comments! It's just `#` with a single quote, `'`. You can then add special labels with `@`. In our case, we will just look at the ones that were created with the insert roxygen skeleton helper. We will look at more of these soon.
+
+Which we can then populate:
+
+``` r
+#' Deliver Praise
+#'
+#' @returns a message of praise
+#' @export
+#'
+#' @examples
+#' praise()
+praise <- function() {
+  "Hey Nick, You're really awesome!"
+}
+```
+
+These are special comments that will ultimately end up as documentation for our code!
+
+What do all these parts do?
+
+- first line "Deliver Praise" could actually be written as "@title Deliver Praise", but R is clever enough that it knows the top line is a title. If you want to be really explicit, you can do `#' @title Deliver Praise`
+- `@returns` tells the user...
+UP TO HERE
+
+We then call `document()`, which gives us the output:
+
+```         
+ℹ Updating praiseme documentation
+ℹ Loading praiseme
+Writing NAMESPACE
+Writing praise.Rd
+```
+
+This allows us to look at the documented function with `?praise`.
+
+Which will tell us the following:
+
+```
+ℹ Rendering development documentation for "praise"
+```
+
+And here's a GIF of the action:
+
+![](images/clipboard-3671051630.gif)
+
+This function also gets added to the NAMESPACE file.
+
+
+Note three things:
+
+1.  NAMESPACE now has `boxplot_study_state.R` in it
+2.  We have added some roxygen code
+3.  There's some LaTeX looking code in `man/boxplot_study_state.Rd`
 
 ::: {.callout-caution title="Why do we need to export the code?" collapse="true"}
-
 One of the reasons we don't want to make all of the code that you wrote available to the user is that if every package we loaded also loaded all objects created in all of the R package, then there's a chance it might start to interfere with someone elses code. We want to avoid that by being really specific about which functions are available to the user.
-
 :::
-
-
 
 Install + Restart Plus extra restart Try and run praise() it in the console Doesn’t work - and the reason is...that we need to tell R to export it (brief aside about why exporting is necessary) What is roxygen? A way to add information to a function. + how to use it How to export a function - `#' @export` before the function Install + restart Praise works! Now you try Add rest of documentation (@title, @description) Check documentation `?praise` Now you try Expand on documentation Add an argument to the function Let’s make it that we can use a name Run devtools::check() Warning - DESCRIPTION Wait, what have we created? What are all of these files and folders? DESCRIPTION Live edit the DESCRIPTION Add the details Title Author Maintainer Description License (usethis::use_mit_license()) - Check out tldrlegal https://tldrlegal.com/ What is the folder structure? What are we even looking at? Run devtools::check() They could submit this right now!
 
