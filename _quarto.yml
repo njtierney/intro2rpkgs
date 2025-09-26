@@ -43,9 +43,11 @@ book:
     - "installation.qmd"
     - "rstudio.qmd"
     - "workflow.qmd"
-    - "create-the-pkg.qmd" # needs substantial extra work
+    - "create-the-pkg.qmd"
+    - "exporting-and-documenting.qmd"
+    - "add-arguments.qmd"
     - "how-to-use-extra-pkgs.qmd" # lots of extra work
-    - "add-documentation.qmd" # lots of extra work
+    - "use-check.qmd"
     - "push-to-github.qmd" #
     - "add-readme.qmd"
     - "add-tests.qmd"

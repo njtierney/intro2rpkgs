@@ -1,0 +1,116 @@
+# Expanding Praise: Adding arguments
+
+Our goal is now this: How to make this function praise someone else? Currently it is:
+
+```{r}
+praise <- function() {
+  "Hey Nick, You're really awesome!"
+}
+```
+
+Which is very specific, and only applies to people named "Nick". What if we wanted to deliver praise to other people, like Chitra, Di, Miles, Kerrie, or Holly?
+
+We could rewrite the function each time:
+
+```{r}
+praise <- function() {
+  "Hey Chitra, You're really awesome!"
+}
+
+praise()
+
+praise <- function() {
+  "Hey Di, You're really awesome!"
+}
+
+praise()
+```
+
+Or we could make specific functions for each person:
+
+```{r}
+praise_chitra <- function() {
+  "Hey Chitra, You're really awesome!"
+}
+
+praise_chitra()
+
+praise_di <- function() {
+  "Hey Di, You're really awesome!"
+}
+
+praise_di()
+```
+
+But this isn't quite right - we would need to write a new function for every person we wanted to praise. It is repetitive, and isn't really expressing the idea that we want to communicate: We want to deliver praise to __anyone__.
+
+
+What we want is some kind of a template, like as if we could write:
+
+```{r}
+"Hey PERSON, You're really awesome!"
+```
+
+Where we could replace "PERSON" with a name!
+
+And then the interface would look like this:
+
+```r
+praise("Di")
+praise("Chitra")
+```
+
+Let's get some of this code working first. One way to do this is to use `paste`:
+
+```{r}
+name <- "Di"
+paste("Hey", name, ", You're really awesome!")
+```
+
+`paste` is a very powerful function, but we can see that it has added in an extra spaces before the comma. This is because of a default argument of `paste`. We can get around that with `paste0`, which has zero spaces between phrases.
+
+```{r}
+name <- "Di"
+paste0("Hey ", name, ", You're really awesome!")
+```
+
+Now let's put this into action in the function:
+
+```{r}
+praise <- function(name){
+  paste0("Hey ", name, ", You're really awesome!")
+}
+praise("Di")
+praise("Chitra")
+praise("Hey")
+```
+
+What we did here was add an argument to the function!
+
+In order to try it out in the R package, I'm going to suggest that we learn about a new workflow: `devtools::load_all()`
+
+## `devtools::load_all()`: the workflow of package development
+
+One of the major workflows during R package development is this cycle:
+
+1.  Edit R functions
+2.  `devtools::load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
+3. Test that the output does what we expect in the console
+4. If you aren't satisfied with how it behaves, tepeat steps 1-3 until satisfied.
+
+The `load_all()` function means you don't need to go through the whole process before where you build and reload the package. The reason that we might not want to do that sometimes is that it ends up taking a bit of time to build a package each time you want to experiment with it.
+
+::: {.callout-note title="Your turn: add arguments and `load_all()`"}
+
+1. Update the `praise` function to use the extra argument.
+2. Use `devtools::load_all()` to load the function 
+3. see if the output does what you want.
+4. Repeat 1-3 until you are happy with the output.
+
+:::
+
+::: {.callout-tip title="Cheatsheets" collapse="true"}
+There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
+:::
+
+This package is looking pretty nice - let's see how close it is to being ready by running it through the gamut of `devtools::check()`
