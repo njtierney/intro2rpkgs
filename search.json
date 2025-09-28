@@ -1,0 +1,512 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to R Packages",
+    "section": "",
+    "text": "About this\nThis book is an introduction to creating an R package. It focusses on building an R package with 1-2 functions, the praiseme package (modelled on the praise package).\nThis book is a resource that will grow and change over time as a living book.\nAfter reading this book and doing the workshop, you should feel comfortable doing the following:",
+    "crumbs": [
+      "About this"
+    ]
+  },
+  {
+    "objectID": "index.html#licence",
+    "href": "index.html#licence",
+    "title": "Introduction to R Packages",
+    "section": "Licence",
+    "text": "Licence\nThis work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    "crumbs": [
+      "About this"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "why-r-pkgs.html",
+    "href": "why-r-pkgs.html",
+    "title": "1  Why write an R package?",
+    "section": "",
+    "text": "1.1 An R package is a laundry basket\nAn R package is a way for you to use the same code in many places.\nThis is really useful when you have code you have written in one project, that you want to use in another. It doesn’t need to be useful to everyone, it can just be useful to you! A nice first R package could be a collection of useful R code you have written and use in multiple projects. My first R package was {neato},which contained some functions to help tidy up decision trees.\nThe main benefit of an R package is that it provides this really portable way to share code.\nImagine that you had a really nice way to plot some data. And now imagine that a colleague wants to use that same plot design, but in their other project, how do you share the code?\nYou could email it, sure.\nBut what do you do when you find a bug in your code, because the plot didn’t handle missing values? How do you share that code with your friend? You could send another email.\nWhat if other people start to want to use your plot? Maybe there’s actually some other similar plots you want to share. And maybe there’s a statistical method that goes along with this. They are all related. All similar.\nThe solution, as I said above, is an R package:\nIt keeps all your code bundled (packaged, even) up in something that is easily transportable.\nAn analogy I like to think about for R packages is from Roger Peng, who described an R package as being like a laundry basket.\nIf I try and take my dirty laundry down the stairs in an apartment building to the laundry, I probably want something to hold it all in together. I don’t really want to just bundle it up in my arms and go on a long journey down some stairs and through multiple doors. I’m almost certainly going to lose a sock, a shirt, or worse, a handkerchief. If don’t manage to lose anything it’s probably because I’ve been so focussed on keeping it all bundled together that I might have forgotten to bring my keys to let me back in, or some change to pay for the machine, because they still don’t have a card machine. And then when it is done I need to take it back upstairs to hang out to dry in my apartment, and I’ve got the same problem, but now it’s soggy clothing.\nThe point is, my life would be easier here if I had something simple: a laundry basket. It keeps all my stuff together, it makes moving it from place to place much simpler, and it means I can put all my clothes in it, and not be worried I’ve dropped anything along the way.\nThe R package is the laundry basket to put all your code in to take from place to place. If you want to use the same code in multiple places, the best way to do this is with an R package.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Why write an R package?</span>"
+    ]
+  },
+  {
+    "objectID": "why-r-pkgs.html#our-approach-keeping-it-simple-with-the-praiseme-package",
+    "href": "why-r-pkgs.html#our-approach-keeping-it-simple-with-the-praiseme-package",
+    "title": "1  Why write an R package?",
+    "section": "1.2 Our Approach: Keeping it simple with the {praiseme} package",
+    "text": "1.2 Our Approach: Keeping it simple with the {praiseme} package\nSo, I want to help you write an R package, and to do this, I am going to mimic the resource that helped me the most when I first started. This was Hilary Parker’s blog post, “Writing an R package from scratch”.\nThis focussed on creating a package, cats, and a single function, cat_function(), which looked like the following:\n\ncat_function &lt;- function(love=TRUE){\n  if(love==TRUE){\n    print(\"I love cats!\")\n  }\n  else {\n    print(\"I am not a cool person.\")\n  }\n}\n\ncat_function()\n\n[1] \"I love cats!\"\n\n\nWhat I loved about this post was that it was so accessible. The example idea encouraged exploration and iteration and I was confident I could do it. The simple idea dropped the barrier to entry, and there was no “You must be this good at writing R code to enjoy this ride”.\nIt felt like I could do it. Plus, I like cats.\nSo the idea with this book is to empower you in a similar way to make your own R package. We will do this by focussing on a really simple example: a function that delivers praise. It will look like this:\n\npraise &lt;- function(){\n  \"Hey, you're really great!\"\n}\n\npraise()\n\n[1] \"Hey, you're really great!\"\n\n\nWe will go through the whole process of all the bits and pieces that sit around an R package: documentation, metadata (DESCRIPTION file), tests, checks, git, github, even a website.\nI know praise() is a simple function, and while I think it would be great to teach a really useful example, where you would learn how to write really useful functions you would use every day.\nI think this is not a bad idea, but I think it gets in the way of the main goal: learning how to write an R package.\nWriting good R code is a lifelong journey in the same way it is to become a good at any complex skill, like writing, or music. It takes practice and persistence. It also helps that we’ve got so many great people in the R community who help each other.\nSo the idea with this book is to focus on a really simple example, so you can spend your energy on understanding the framework of an R package, and and less energy on understanding functions, and how they work.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Why write an R package?</span>"
+    ]
+  },
+  {
+    "objectID": "why-r-pkgs.html#other-resources",
+    "href": "why-r-pkgs.html#other-resources",
+    "title": "1  Why write an R package?",
+    "section": "1.3 Other Resources",
+    "text": "1.3 Other Resources\nThere are many other resources on writing R packages. They are good to know about, and I think they are worth your time. Here are some of them:\n\n“R packages”. I consider the “R packages” book (now in its second edition, by Hadley Wickham and Jenny Bryan), to be the authority on best practices for package development\nThe rOpenSci guide, “rOpenSci Packages: Development, Maintenance, and Peer Review”. This is an excellent guide that is more advanced.\n\nBefore we get started in earnest, we need to make sure we have things installed properly.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Why write an R package?</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "2  Installation",
+    "section": "",
+    "text": "2.1 Overview\nIn this section, the aim is to have everyone set up with R, RStudio, the tools you need to build an R package, and git.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#overview",
+    "href": "installation.html#overview",
+    "title": "2  Installation",
+    "section": "",
+    "text": "Duration 15 minutes",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#questions",
+    "href": "installation.html#questions",
+    "title": "2  Installation",
+    "section": "2.2 Questions",
+    "text": "2.2 Questions\n\nHow do I install R?\nHow do I install RStudio\n\nWhat about Positron?\n\nHow do I install git?\nHow do I install RTools?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#software-setup-r-friends",
+    "href": "installation.html#software-setup-r-friends",
+    "title": "2  Installation",
+    "section": "2.3 Software Setup: R + Friends",
+    "text": "2.3 Software Setup: R + Friends\n\n2.3.1 Installing R\nInstall latest version of R from CRAN\n\n\nWindowsMacOSLinux\n\n\nhttps://cloud.r-project.org/bin/windows/\n\n\nhttps://cloud.r-project.org/bin/macosx/\n\n\nhttps://cloud.r-project.org/bin/linux/\n\n\n\n\n\n2.3.2 Installing RStudio\n\nInstall latest version of RStudio Desktop from Posit at this link\n\n\n\n\n2.3.3 Installing R packages for development\npak: faster, optimised downloads, that will not install packages if they are already installed:\ninstall.packages(\"pak\")\ndevtools: Package development tools that make your life easier. May take a few minutes.\npak::pak(\"devtools\")\nknitr: For writing vignettes and more.\npak::pak(\"knitr\")\n\n\n\n\n\n\nCautionAdvanced: Personalising your R Profile\n\n\n\n\n\nThis is really neat, and I think it’s actually worthwhile doing, but it does take up some time, and there are some warnings. You don’t need to do this to write an R package, but it will make your life a little easier.\nAs you develop R packages, you’ll need to go through a cycle of restarting R, and loading things up to be ready. One of the issues with this is that you’ll find yourself writing code like:\n\nlibrary(devtools)\n\nA lot. To save you time, we can edit a very special file called “The R profile”, which is saved as .RProfile. This code is special, and awesome, because it is run every time you start R. It is also dangerous, for exactly the same reason.\nI recommend running the following code from devtools to help set this up:\nuse_devtools()\nWhich will bring up the following message:\n☐ Include this code in .Rprofile to make devtools\n  available in all interactive sessions:\n  if (interactive()) {\n    suppressMessages(require(devtools))\n  }\n  [Copied to clipboard]\n☐ Modify /Users/nick/.Rprofile.\n☐ Restart R for changes to take effect.\nSo, copy and paste the above, which I will now explain. There are three parts to this that I will break down:\nrequire(devtools)\nwe usually recommend writing library(devtools), but in this instance, require is what we want, because if the package is not installed, require will throw a warning, rather than an error:\n\n# warn\nrequire(whatevenisthis)\n\nLoading required package: whatevenisthis\n\n\nWarning in library(package, lib.loc = lib.loc, character.only = TRUE,\nlogical.return = TRUE, : there is no package called 'whatevenisthis'\n\n# error\nlibrary(whatevenisthis)\n\nError in library(whatevenisthis): there is no package called 'whatevenisthis'\n\n\nWe do not want an error when we start R, it is annoying.\nsuppressMessages()\nThis code suppresses any messages that appear from running this code, which again, we want, because we don’t (generally) want our R session to announce something upon startup.\n  if (interactive()) {\n    suppressMessages(require(devtools))\n  }\nThis means that this code is only run if the R session is interactive. This always felt a bit strange to me - because I had only ever run R interactively. But you don’t want to run require(devtools) when we aren’t using R interactively, because it means we are potentially changing the state of things. Essentially, it’s good practice.\nAlso, here are a couple of times that you might not realise you are using R non-interactively:\n\nrendering a document using quarto or rmarkdown\nbuilding an R package (which you’ll learn about later)\n\nYou also use R non-interactively when you are running Rscript in the command line.\nFinally, another bit of useful code in your R profile is something like this:\n# usethis options\noptions(\n  usethis.full_name = \"Nicholas Tierney\",\n  usethis.protocol = \"https\",\n  usethis.description = list(\n    `Authors@R` = '\n    c(\n      person(\n        given = \"Nicholas\",\n        family = \"Tierney\",\n        role = c(\"aut\", \"cre\"),\n        email = \"nicholas.tierney@gmail.com\",\n        comment = c(ORCID = \"https://orcid.org/0000-0003-1460-8722\")\n      )\n    )',\n    License = \"MIT + file LICENSE\",\n    Language = \"en-GB\",\n    Version = \"0.0.0.9000\"\n  ),\n  # set SI to true\n  reprex.session_info = TRUE\n)\nThis helps when setting up your R package for the first time, to make sure you set up your DESCRIPTION file. It isn’t required, but it is neat, and I think worthwhile.\nBecause I need to set these things up on different laptops sometimes, I actually write all these files to github. They are typically called “dotfiles” - you can see mine at http://github.com/njtierney/dotfiles.\n\n\n\n\n\n2.3.4 Checking your R setup\nYou should be able to run the following code without error:\n\nlibrary(pak)\nlibrary(devtools)\n\nLoading required package: usethis\n\nlibrary(testthat)\n\n\nAttaching package: 'testthat'\n\n\nThe following object is masked from 'package:devtools':\n\n    test_file\n\nlibrary(roxygen2)\nlibrary(knitr)\nR.version.string\n\n[1] \"R version 4.5.1 (2025-06-13)\"\n\n\nAnd this code here should tell you if there are any issues, here is what my output is:\ndevtools::dev_sitrep()\n── R ───────────────────────────────────────────────────────────────────────────────────────\n• version: 4.5.1\n• path: '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/'\n── RStudio ─────────────────────────────────────────────────────────────────────────────────\n• version: 2025.9.0.387\n── devtools ────────────────────────────────────────────────────────────────────────────────\n• version: 2.4.5\n• devtools or its dependencies out of date:\n  'purrr', 'pillar', 'credentials', 'gh', 'usethis'\n  Update them with `devtools::update_packages(\"devtools\")`\n── dev package ─────────────────────────────────────────────────────────────────────────────\n• package: 'rpkgintro'\n• path: '/Users/nick_1/github/njtierney/intro2rpkgs/'\n• rpkgintro dependencies out of date:\n  'pillar', 'vroom', 'purrr', 'credentials', 'ggplot2', 'gh', 'usethis', 'here'\n  Update them with `devtools::install_dev_deps()`\nNote that there are a couple of suggestions for me to install or update certain packages. This isn’t strictly necessary, but is probably a good idea. .\nIn general for this course I think you are best off with a recent version of R, like R version 4.5.0, which came out in April 2025.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#software-setup-git-and-github",
+    "href": "installation.html#software-setup-git-and-github",
+    "title": "2  Installation",
+    "section": "2.4 Software setup: git and github",
+    "text": "2.4 Software setup: git and github\nSetting up git and github can sometimes take a little while, in the course we will go through the bulk of the package guide before coming back to this.\nBriefly, git is essentially a way of managing versions and changes. You can think of it like a product such as dropbox, but with super powers. You can go back in time, you can make copies for changing, and delicately and precisely merge them back in, or leave them where they are.\nYour software needs a home. You’ll typically start with your project on your laptop or computer. GitHub is where you can store it online. The benefits to sharing your work on github are many, but my personal top reasons are:\n\nBuild trust in your software. If the community can see your code, they can trust it better.\nProvides a way to log ideas and bugs via issues.\nProvides a way for the community to contribute to your code.\n\nMy favourite book on using git and github with R is the book “happy git with R” By Jenny Bryan, Jim Hester, and the Stat 545 TAs. Honestly, it’s hard to recommend better installation instructions than their battle tested ones, so I’ll point you to this resource in case you run into troubles here.\n\n2.4.1 setting up github\nGetting set up on github you need an account. It’s easy enough to set up - go to https://github.com/ . When picking a username, I recommend the following:\n\nKeep it short. jsmith is better than jonathansmith.\nAvoid numbers and jokes. jsmith is better than jsmith123\nKeep it professional. jsmithisthebest\nKeep it lowercase DONOTSHOUT\n\n\n\n2.4.2 installing git\nInstalling git can sometimes be a challenge. This is largely because sometimes there are small differences that arise to install windows vs mac vs linux. Or sometimes there are issues with work computers with strong permissions.\nGenerally, you should install git from: https://git-scm.com/downloads\nBut, if you encounter issues, I would advise checking out the battle-tested instructions at: https://happygitwithr.com/install-git.\nOnce you’ve installed git, I recommend running this:\n\nusethis::git_vaccinate()\n\n✔ Configuring 'core.excludesFile': '~/.gitignore'\n\n\n✔ Creating the global (user-level) gitignore: '~/.gitignore'\n\n\n✔ Adding \".Rproj.user\", \".Rhistory\", \".RData\", \".httr-oauth\", \".DS_Store\", and\n  \".quarto\" to '/home/runner/.gitignore'.\n\n\nWhich ensures that you ignore specific files (specifically, Rproj.user, .Rhistory, .Rdata, .httr-oauth, .DS_Store, and .quarto). This is important because it decreases your chances of leaking credentials or other important details to GitHub.\n\n\n2.4.3 The “git handshake”\nIn order for your computer to talk to git and github properly, it needs to know three things:\n\nName\nEmail\nCredentials\n\ngit needs to know your name and email - this should be the name and email you used to set up your github account. Set this up with use_git_config()\n\nlibrary(usethis)\nuse_git_config(\n  user.name = \"Ned Kelly\", \n  user.email = \"ned@example.org\"\n)\n\ngithub needs a personal access token - this is so you can talk to github from R. This becomes really handy, and dare I say it, nearly magical later on. To get this, run:\nusethis::create_github_token()\nThis will open up GitHub and create a Personal Access Token. If this doesn’t work, go to https://github.com/settings/tokens and click “Generate New Token”, and select the (classic).”\nGenerally speaking you want the following scopes selected:\n\n“repo”\n“user”\n“workflow”.\n\nA token will be created - keep this page open, and copy the token to your clipboard.\nThen, go to R, and run:\ngitcreds::gitcreds_set()\nAnd paste this PAT code in. Then, verify all of this with:\nusethis::git_sitrep()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#software-setup-rtools",
+    "href": "installation.html#software-setup-rtools",
+    "title": "2  Installation",
+    "section": "2.5 Software setup: RTools",
+    "text": "2.5 Software setup: RTools\nThis is actually something that you only need to do if you want to use C or C++ with your R package, which isn’t something you need to do for this course. To read more on this, see “The R build toolchain” from the R Packages book.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Installation</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html",
+    "href": "rstudio.html",
+    "title": "3  RStudio, What and Why",
+    "section": "",
+    "text": "3.1 Overview\n(This section is also in my other book, “Quarto for Scientists”)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html#overview",
+    "href": "rstudio.html#overview",
+    "title": "3  RStudio, What and Why",
+    "section": "",
+    "text": "Teaching 5 minutes\nExercises 2 minutes",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html#questions",
+    "href": "rstudio.html#questions",
+    "title": "3  RStudio, What and Why",
+    "section": "3.2 Questions",
+    "text": "3.2 Questions\n\nWhat is RStudio?\nWhy should I use RStudio?\nWhat features should I change?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html#objectives",
+    "href": "rstudio.html#objectives",
+    "title": "3  RStudio, What and Why",
+    "section": "3.3 Objectives",
+    "text": "3.3 Objectives\n\nGet familiarised with RStudio\nGet set up with not storing the RStudio workspace\nDownload the course materials for the workshop",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html#what-is-rstudio-and-why-should-i-use-it",
+    "href": "rstudio.html#what-is-rstudio-and-why-should-i-use-it",
+    "title": "3  RStudio, What and Why",
+    "section": "3.4 What is RStudio, and why should I use it?",
+    "text": "3.4 What is RStudio, and why should I use it?\n\nIf R is the engine and bare bones of your car, then RStudio is like the rest of the car.\n\nThe engine is super critical part of your car. But in order to make things properly functional, you need to have a steering wheel, comfy seats, a radio, rear and side view mirrors, storage, and seatbelts. RStudio is all those niceties\nThe RStudio layout has the following features:\n\nOn the upper left, the Quarto script\nOn the lower left, the R console\nOn the lower right, the view for files, plots, packages, help, and viewer.\nOn the upper right, the environment / history pane\n\n\n\n\n\n\nA screenshot of the RStudio working environment.\n\n\n\n\n\nThe R console is the bit where you can run your code.\nThe file/plot/package viewer is a handy browser for your current files, like Finder, or File Explorer.\nPlots are where your plots appear, you can view packages, see the help files.\nThe environment / history pane contains the list of things you have created, and the past commands that you have run.\n\n\n\n\n\n\n\nNoteYour Turn: RStudio default options\n\n\n\nTo first get set up, I highly recommend changing the following setting\nTools &gt; Global Options (or Cmd + , on macOS)\nUnder the General tab:\n\nFor workspace:\n\nUncheck restore .RData into workspace at startup.\nSave workspace to .RData on exit : “Never”.\n\nFor History:\n\nUncheck “Always save history (even when not saving .RData).\nUncheck “Remove duplicate entries in history”.\n\n\n\n\n\nSetting the options right for RStudio, so you don’t restore previous sessions work, and don’t save it either.\n\n\nThis means that you won’t save the objects and other things that you create in your R session and reload them. This is important for two reasons\n\nReproducibility: you don’t want to have objects from last week cluttering your session\nPrivacy: you don’t want to save private data or other things to your session. You only want to read these in.\n\nYour “history” is the commands that you have entered into R.\nAdditionally, not saving your history means that you won’t be relying on things that you typed in the last session, which is a good habit to get into!",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "rstudio.html#learning-more",
+    "href": "rstudio.html#learning-more",
+    "title": "3  RStudio, What and Why",
+    "section": "3.5 Learning more",
+    "text": "3.5 Learning more\n\nRStudio IDE cheatsheet",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>RStudio, What and Why</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html",
+    "href": "create-the-pkg.html",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "",
+    "text": "4.1 Open RStudio\nSo, let’s write the R package!",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#project-upper-right-new-project-new-directory",
+    "href": "create-the-pkg.html#project-upper-right-new-project-new-directory",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.2 Project (upper right) >> New Project >> New Directory",
+    "text": "4.2 Project (upper right) &gt;&gt; New Project &gt;&gt; New Directory",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#r-package-using-devtools",
+    "href": "create-the-pkg.html#r-package-using-devtools",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.3 R Package using devtools",
+    "text": "4.3 R Package using devtools\n\nSelect “R Package Using devtools”.\nTo find this you may need to scroll down in the menu.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#enter-package-name-praiseme",
+    "href": "create-the-pkg.html#enter-package-name-praiseme",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.4 Enter package name: praiseme",
+    "text": "4.4 Enter package name: praiseme\nIn “Directory Name” write the name of the package. In our case, “praiseme”",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#verify-the-project-subdirectory-path-does-not-contain-any-spaces",
+    "href": "create-the-pkg.html#verify-the-project-subdirectory-path-does-not-contain-any-spaces",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.5 Verify the project subdirectory path does not contain any spaces",
+    "text": "4.5 Verify the project subdirectory path does not contain any spaces\nThis is because of some inherent limitations to how this part of the software world works. Here are some good and bad examples:\n\nGood:\n\n~/github\n~/GitHub\n~/yourname\n~/YourName\n\nBad:\n\n~/My Computer\n~/Your Name",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#click-create-project",
+    "href": "create-the-pkg.html#click-create-project",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.6 Click “Create Project”",
+    "text": "4.6 Click “Create Project”",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#click-build-tab-in-environment-browser",
+    "href": "create-the-pkg.html#click-build-tab-in-environment-browser",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.7 Click “Build” tab in environment browser",
+    "text": "4.7 Click “Build” tab in environment browser",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#click-more-configure-build-tools",
+    "href": "create-the-pkg.html#click-more-configure-build-tools",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "4.8 Click More —> “Configure Build Tools…”",
+    "text": "4.8 Click More —&gt; “Configure Build Tools…”\n\n\n4.8.1 Check “Generate documentation with Roxygen” –&gt; Click the “Configure…” button\n\n\n\n4.8.2 Under “Use roxygen to generate:” Check the following fields\n\n“Rd files”\n“Collate field”\n“NAMESPACE file”\n“R CMD check”\n“source and binary package builds”\n\n\nClick OK in Project Build Tools Options",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#description",
+    "href": "create-the-pkg.html#description",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "5.1 DESCRIPTION",
+    "text": "5.1 DESCRIPTION\nMy DESCRIPTION file looks like this, initially\nPackage: praiseme\nTitle: What the Package Does (One Line, Title Case)\nVersion: 0.0.0.9000\nAuthors@R: \n    person(\"Nicholas\", \"Tierney\", , \"nicholas.tierney@gmail.com\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"https://orcid.org/0000-0003-1460-8722\"))\nDescription: What the package does (one paragraph).\nLicense: MIT + file LICENSE\nEncoding: UTF-8\nLanguage: en-GB\nRoxygen: list(markdown = TRUE)\nRoxygenNote: 7.3.3\nThis is metadata about the package. Kind of like reading the packaging label of a can of food. It’s not the contents of the can, but it tells you some important information.\nHere’s a marked up summary:\n\nSome key points:\n\nThis metadata is really important and specifically formatted. Not indenting properly, or adding a new line somewhere can sometimes cause your package to not work.\nThe DESCRIPTION details here have my name and a few other things set (like Language: en-GB), because of where we set this up in installation.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#rbuildignore",
+    "href": "create-the-pkg.html#rbuildignore",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "5.2 .Rbuildignore",
+    "text": "5.2 .Rbuildignore\nThis lists files that we don’t want to package up when we eventually build our R package.\nThis contains:\n^praiseme\\.Rproj$\n^\\.Rproj\\.user$\nWhich are specific RStudio files. As you get further along in the package building process, more files will be added to .Rbuildignore.\nTo build on the food packaging analogy, you could think of this like a dislaimer saying “this food contains no nuts”. We are telling R not to put these files in the R package.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "create-the-pkg.html#namespace",
+    "href": "create-the-pkg.html#namespace",
+    "title": "4  Create the package, {praiseme}!",
+    "section": "5.3 NAMESPACE",
+    "text": "5.3 NAMESPACE\nA special file! This will eventually contain all the functions that the user has access to. We don’t touch it by hand. It gets updated automatically via devtools and usethis. It looks like this currently:\n# Generated by roxygen2: do not edit by hand\nWe will come back to this!",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Create the package, {praiseme}!</span>"
+    ]
+  },
+  {
+    "objectID": "exporting-and-documenting.html",
+    "href": "exporting-and-documenting.html",
+    "title": "5  Exporting and documenting your functions",
+    "section": "",
+    "text": "5.1 Restart + library(praiseme)\nWe’ve just tried to use our new praise() function, but it doesn’t work!\nThe reason is that we need to tell R to export it, so that it becomes available when we do:\nYou might have noticed that you can source, or run the code to get access to the function. This is similar, but actually different to exporting the code.\nYou can think of exporting like only running the code for very select parts of your package - and only making certain parts available to the user when they run library(pkgname).\nExporting is a special process in R, and we make our function available using roxygen2.\nIn short, roxygen2 provides us with nifty syntax to give documentation to our functions, which also allows them to be exported.\nCurrently our code looks like this:\nAnd we can add a “roxygen skeleton” by going to code &gt; insert roxygen skeleton (or with Alt/Option + Ctrl/Cmd + Shift + R) whilst our cursor is in the function, and we get this:\nYou can think of roxygen as special comments - notice that they are really similar to R comments! It is the comment, # plus the single quote, ' - so #'. You can add special labels with @. In our case, we will just look at the ones that were created with the insert roxygen skeleton helper. We will look at more of these soon. But if you want to see all of them, see the roxygen2 documentation.\nSo we populate the roxygen skeleton, like so:\nThese are special comments that will ultimately end up as documentation for our code.\nLet’s talk about what these parts do.\nWe then call document(), which gives us the output:\nThis allows us to look at the documented function with ?praise.\nWhich will tell us the following:\nAnd here’s a GIF of the action:\nThese two bits of output here:\nTell us the function has been added to the NAMESPACE file:\nAnd also the praise.Rd file is added in man/praise.Rd, which is a markup language that is similar to LaTeX\nSo to recap:\nNow let’s try this:\nDoes this deliver your praise?\nNow let’s next explore expanding praise by adding more flexibility to our praise function so you can praise someone else!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exporting and documenting your functions</span>"
+    ]
+  },
+  {
+    "objectID": "exporting-and-documenting.html#restart-librarypraiseme",
+    "href": "exporting-and-documenting.html#restart-librarypraiseme",
+    "title": "5  Exporting and documenting your functions",
+    "section": "",
+    "text": "Restart R\nInstall + Restart\n\nlibrary(praiseme)\npraise()",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exporting and documenting your functions</span>"
+    ]
+  },
+  {
+    "objectID": "add-arguments.html",
+    "href": "add-arguments.html",
+    "title": "6  Expanding Praise: Adding arguments",
+    "section": "",
+    "text": "6.1 devtools::load_all(): the workflow of package development\nOur goal is now this: How to make this function praise someone else? Currently it is:\nWhich is very specific, and only applies to people named “Nick”. What if we wanted to deliver praise to other people, like Chitra, Di, Miles, Kerrie, or Holly?\nWe could rewrite the function each time:\nOr we could make specific functions for each person:\nBut this isn’t quite right - we would need to write a new function for every person we wanted to praise. It is repetitive, and isn’t really expressing the idea that we want to communicate: We want to deliver praise to anyone.\nWhat we want is some kind of a template, like as if we could write:\nWhere we could replace “PERSON” with a name!\nAnd then the interface would look like this:\nLet’s get some of this code working first. One way to do this is to use paste:\nWhich takes name and pastes it between the text around it - similar to our example above:\npaste is a very powerful function! But did you notice it has added in an extra space before the comma.\nThis is because of a default argument of paste, sep = \" \".\nThis says: Separate each new word with a space.\nWe can get around this by specifying the argument sep = \"\":\nOr, we can use another function, paste0, which sets that by default:\nNow let’s put this into the function:\nWhat we did here was add an argument to the function!\nIn order to try it out in the R package, I’m going to suggest that we learn about a new workflow: devtools::load_all()\nOne of the major workflows during R package development is this cycle:\nThe load_all() function means you don’t need to go through the whole process before where you build and reload the package. The reason that we might not want to do that sometimes is that it ends up taking a bit of time to build a package each time you want to experiment with it.\nThis package is looking pretty nice! Let’s see how close it is to being ready by running it through the gamut of devtools::check(). This means we could feasibly get this onto CRAN!",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expanding Praise: Adding arguments</span>"
+    ]
+  },
+  {
+    "objectID": "add-arguments.html#devtoolsload_all-the-workflow-of-package-development",
+    "href": "add-arguments.html#devtoolsload_all-the-workflow-of-package-development",
+    "title": "6  Expanding Praise: Adding arguments",
+    "section": "",
+    "text": "Edit R functions\ndevtools::load_all() (or keyboard shortcut Ctrl/Cmd+Shift+L)\nTest that the output does what we expect in the console\nIf you aren’t satisfied with how it behaves, tepeat steps 1-3 until satisfied.\n\n\n\n\n\n\n\n\nNoteYour turn: add arguments and load_all()\n\n\n\n\nUpdate the praise function to use the extra argument.\nUse devtools::load_all() to load the function\nsee if the output does what you want.\nRepeat 1-3 until you are happy with the output.\nExtension: Try changing the praise adjective with another argument!\n\n\n\n\n\n\n\n\n\nTipCheatsheets\n\n\n\n\n\nThere is a great cheatsheet for package development that I had stapled to my cubicle wall. The website now is very useful, but make sure to check out the PDF.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expanding Praise: Adding arguments</span>"
+    ]
+  },
+  {
+    "objectID": "use-check.html",
+    "href": "use-check.html",
+    "title": "7  Using devtools::check()",
+    "section": "",
+    "text": "7.1 How to deal with devtools::check() - errors, warnings, notes.\nSo far we have written a very basic R package structure, and given it some documentation and examples. We’ve even added our new praise function to have\nNow, let’s see if we can get this to pass the bar - could this go onto CRAN?\nWe can do this with devtools::check()\nThis might seem advanced, and in some ways it is - devtools::check() does a lot of things. What you need to know right now is essentially that it is running many tests to check if it is in the right standard, that it has the right files, and they are properly written.\nLet’s run it!\nYou should see something like the following key output when you run devtools::check():\nOK! There’s a bit going on, let’s discuss how to deal prioritise these messages.\nat the end of the devtools::check above we got this final message:",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Using `devtools::check()`</span>"
+    ]
+  },
+  {
+    "objectID": "use-check.html#how-to-deal-with-devtoolscheck---errors-warnings-notes.",
+    "href": "use-check.html#how-to-deal-with-devtoolscheck---errors-warnings-notes.",
+    "title": "7  Using devtools::check()",
+    "section": "",
+    "text": "1 error ✖ | 2 warnings ✖ | 0 notes ✔\n\n7.1.1 Order of operations: ERROR before WARNING before NOTE\nGenerally speaking, you want to fix these in the order that they appear:\n\nFix errors first, because they are larger more substantial problems\nFix warnings second as they are less bad than errors\nFix notes generally only when you are getting close to submit to CRAN\n\nOne caveat I would add to this is that sometimes it can feel like an easy win to fix the smallest number first. So for example if I had 10 errors and 1 warning, I might fix the warning first because that feels a little bit more achievable.\nAnother caveat is that as you get more experience you will understand that sometimes one problem is creating several WARNINGs or NOTEs or ERRORs.\n\n\n7.1.2 Solve one thing at a time\nIt is worth trying your best to solve exactly one problem at a time. Work on solving that one problem first, then run check() and move on to the second one once that is solved.\nThe reason is that sometimes as we fix things, we can break them further.\nIf we are just trying to fix one thing at a time, then we can know that any changes we made are more directly tied to that new issue.\nAs you get more experienced, you will understand how to fix problems faster, and how to fix multiple things at the same time.\nBut when you are just starting out with package development, fix one thing at a time.\n\n\n7.1.3 How to solve the error/warning/note\nBreak it into chunks. Let’s look at the first error message above:\n❯ checking examples ... ERROR\n  Running examples in ‘praiseme-Ex.R’ failed\n  The error most likely occurred in:\n  \n  &gt; base::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n  &gt; ### Name: praise\n  &gt; ### Title: Deliver Praise\n  &gt; ### Aliases: praise\n  &gt; \n  &gt; ### ** Examples\n  &gt; \n  &gt; praise()\n  Error in praise() : argument \"person\" is missing, with no default\n  Calls: praise -&gt; paste0\n  Execution halted\nAs you get more experienced, you will know very quickly what these kinds of errors mean. In this case, the error message has occurred under examples. I generally look for another place where there is an error message. In this case, I look at the last part:\n  &gt; ### ** Examples\n  &gt; \n  &gt; praise()\n  Error in praise() : argument \"person\" is missing, with no default\nIn the praise() function we have the examples section, and we just call praise(). But we updated this function to take an argument. For example, praise(name = \"Nick\").\nThe error occurs because the example code, praise(), needs an argument in order to work. Fix it by adding an argument in the example code.\n\n\n\n\n\n\nTipYour turn: Update example\n\n\n\n\nUpdate your example code to reflect the new interface\nRun devtools::document()\nRun devtools::check(), ensure that the error message is no longer there\n\nYou should have something like the following:\n── R CMD check results ───────────────────── praiseme 0.0.0.9000 ────\nDuration: 6s\n\n❯ checking DESCRIPTION meta-information ... WARNING\n  Invalid license file pointers: LICENSE\n\n❯ checking Rd \\usage sections ... WARNING\n  Undocumented arguments in Rd file 'praise.Rd'\n    ‘person’\n  \n  Functions with \\usage entries need to have the appropriate \\alias\n  entries, and all their arguments documented.\n  The \\usage entries must correspond to syntactically valid R code.\n  See chapter ‘Writing R documentation files’ in the ‘Writing R\n  Extensions’ manual.\n\n0 errors ✔ | 2 warnings ✖ | 0 notes ✔",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Using `devtools::check()`</span>"
+    ]
+  },
+  {
+    "objectID": "use-check.html#fixing-warnings-undocumented-arguments",
+    "href": "use-check.html#fixing-warnings-undocumented-arguments",
+    "title": "7  Using devtools::check()",
+    "section": "7.2 Fixing warnings: undocumented arguments",
+    "text": "7.2 Fixing warnings: undocumented arguments\nLet’s focus on the warning regarding arguments, since this is a similar issue to what we were dealing with before:\n❯ checking Rd \\usage sections ... WARNING\n  Undocumented arguments in Rd file 'praise.Rd'\n    ‘person’\n  \n  Functions with \\usage entries need to have the appropriate \\alias\n  entries, and all their arguments documented.\n  The \\usage entries must correspond to syntactically valid R code.\n  See chapter ‘Writing R documentation files’ in the ‘Writing R\n  Extensions’ manual.\nThis warning arises because we have an argument, person, in our function, but we don’t have a corresponding piece of documentation for that argument.\nWe can solve this by adding\n#' @param argument-name Details on the argument.\nSo in our case, something like the following:\n#' Deliver Praise\n#'\n#' @param person character. Name of person to deliver praise.\n#'\n#' @returns a message of praise\n#'\n#' @export\n#'\n#' @examples\n#' praise(person = \"Nick\")\nWe generally put parameters above return.\n\n\n\n\n\n\nTipYour Turn: update argument\n\n\n\n\nUpdate documentation to add a parameter\nRun devtools::document()\nRun devtools::check() to ensure the warning regarding arguments has gone away",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Using `devtools::check()`</span>"
+    ]
+  },
+  {
+    "objectID": "use-check.html#fixing-warnings-license",
+    "href": "use-check.html#fixing-warnings-license",
+    "title": "7  Using devtools::check()",
+    "section": "7.3 Fixing warnings: LICENSE",
+    "text": "7.3 Fixing warnings: LICENSE\nRunning check() let’s focus on the warning with the LICENSE:\n❯ checking DESCRIPTION meta-information ... WARNING\n  Invalid license file pointers: LICENSE\nThis tells us something is going on with the LICENSE file. Note in the DESCRIPTION file we have the following:\nPackage: praiseme\nTitle: What the Package Does (One Line, Title Case)\nVersion: 0.0.0.9000\nAuthors@R: \n    person(\"Nicholas\", \"Tierney\", , \"nicholas.tierney@gmail.com\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"https://orcid.org/0000-0003-1460-8722\"))\nDescription: What the package does (one paragraph).\nLicense: MIT + file LICENSE\nEncoding: UTF-8\nLanguage: en-GB\nRoxygen: list(markdown = TRUE)\nRoxygenNote: 7.3.3\nAnd in the License field we have:\nLicense: MIT + file LICENSE\nAnd when we look at the files we have in our repo, we see:\n\nor\n├── .Rbuildignore\n├── .gitignore\n├── DESCRIPTION\n├── NAMESPACE\n├── R\n│   └── praise.R\n├── man\n│   └── praise.Rd\n└── praiseme.Rproj\nThere isn’t a LICENSE file anywhere!\nIt’s important to pick a license for your code so others know how they should give you attribution. A good license is the MIT license, which essentially allows people to use yoru code for free and to commercialise it, but you cannot be held liable. I am not a lawyer, however, I would recommend that you choose your own license. I’d recommend reading the chapter on licenses in the R packages book, and also consulting the TLDR legal page.\nIn any case, for our example, the MIT license is totally fine. We can apply this by running usethis::use_mit_license():\n\n\n\n\n\n\nTipYour turn: usethis::use_mit_license()\n\n\n\n\nRun: usethis::use_mit_license()\nRun devtools::check()\n\n\n\nRunning usethis::use_mit_license() we see the following text:\n✔ Writing LICENSE.\n✔ Writing LICENSE.md.\n✔ Adding \"^LICENSE\\\\.md$\" to .Rbuildignore.\nWhich creates some files, and adds some text to .Rbuildignore.\n\nNow, let’s see if this solved our check() problem.\n\n\n\n\n\n\nTipYour turn: Run devtools::check() again\n\n\n\n\nRun devtools::check()\nHas this returned all ticks?\n\n\n\nAll going well, this will have resulted in us having our package pass all checks!\nYou should have an output like this at the end of it:\n── R CMD check results ──────────────────────────────────────────── praiseme 0.0.0.9000 ────\nDuration: 5.6s\n\n0 errors ✔ | 0 warnings ✔ | 0 notes ✔\nAs a gif, here’s what that will look like:\n\nWell done! You have written an R package, and essentially you could submit this to CRAN - although I wouldn’t recommend that you do, you now understand a fundamental process:\n\nEdit R files\nRun devtools::load_all()\nCheck R files work as you expect\nIf not, run steps 1-3 as needed\nIf your code is working how you want, run devtools::check() to really make sure you’ve got everything working\n\nNow let’s discuss another important topic - how to use functions from other R packages in your package.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Using `devtools::check()`</span>"
+    ]
+  },
+  {
+    "objectID": "how-to-use-extra-pkgs.html",
+    "href": "how-to-use-extra-pkgs.html",
+    "title": "8  Use other packages",
+    "section": "",
+    "text": "8.1 pkg::fun - why the ::?\nWe’re going to level up our message by adding some styling to the message using the cli package.\nI want to introduce this package for two reasons:\nYou are going to modify your function to look like this:\nWhich will then give you\nNotice that this is really similar to our previous template:\nThe way this works is it replaces the thing inside the curly braces with the text you have in a variable name:\nYou might have noticed that I wrote:\nInstead of\nOne of the major shifts from writing R code and analyses to writing R packages is how you interact with other R packages you want to use.\nNormally, in an R script, when you want to use a function from, say, cli, you use library(cli).\nHowever, we do not ever want to call library(cli) inside a function in an R package. The reason is to do with NAMESPACE conflicts. A popular usecase of this is in the tidyverse R package - where we get this message when we call library(tidyverse).\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.1     ✔ stringr   1.5.2\n✔ ggplot2   4.0.0     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.1.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\nThe conflict message at the bottom tells us that dplyr::filter() masks stats::filter().\nThis is a key issue with package development: masking.\nIf all R packages called library(&lt;package&gt;) on every R package that they depended upon, then we’d have SO MUCH masking. It is almost considered rude or overbearing.\nYou say? The solution is to use what is called the “namespaced” form:\nFor example, if I want to use filter from dplyr, I do so with:\ncars |&gt; \n  dplyr::filter(speed &lt;= 4)\n\n  speed dist\n1     4    2\n2     4   10\nSo for every package we want to use a function from in an R package, we use the “namespaced form”, e.g., dplyr::filter().\nWe also have to declare the dependencies formally, which I’ll discuss in a moment. Right now, I need you to see the errors when you run check, so you can identify this problem yourself later.\nSo now we need to do the following:\nFor example, looking at our praise function, it is in the namespaced form like so:",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Use other packages</span>"
+    ]
+  },
+  {
+    "objectID": "how-to-use-extra-pkgs.html#pkgfun---why-the",
+    "href": "how-to-use-extra-pkgs.html#pkgfun---why-the",
+    "title": "8  Use other packages",
+    "section": "",
+    "text": "cli::cli_inform\n\nlibrary(cli)\ncli_inform\n\n\n\n\n\n\n\n\nHow do you NOT use library??\n\n\npkg::fun()\n\n\n\n\n\n\nidentify the packages that we use in our R package (e.g., cli)\nnamespace them. (cli::cli_inform())\nFormally add the dependency with: use_package(\"cli\").\n\n\npraise &lt;- function(name){\n  cli::cli_inform(\"Hey {name}, You're so awesome!\")\n}\n\n\n\n\n\n\nTipYour Turn: run `devtools::check()\n\n\n\n\nUpdate your R code to look like the following:\n\npraise &lt;- function(name){\n  cli::cli_inform(\"Hey {name}, You're so awesome!\")\n}\n\nrun: devtools::check()\nIdentify the error\nFix this with use_package(\"cli\")",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Use other packages</span>"
+    ]
+  },
+  {
+    "objectID": "how-to-use-extra-pkgs.html#error-there-is-no-package-called-pkg",
+    "href": "how-to-use-extra-pkgs.html#error-there-is-no-package-called-pkg",
+    "title": "8  Use other packages",
+    "section": "8.2 Error: there is no package called ‘pkg’",
+    "text": "8.2 Error: there is no package called ‘pkg’\nWe get this error and warning related to cli:\n── R CMD check results ───────────────────── praiseme 0.0.0.9000 ────\nDuration: 4.1s\n\n❯ checking examples ... ERROR\n  Running examples in ‘praiseme-Ex.R’ failed\n  The error most likely occurred in:\n  \n  &gt; base::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n  &gt; ### Name: praise\n  &gt; ### Title: Deliver Praise\n  &gt; ### Aliases: praise\n  &gt; \n  &gt; ### ** Examples\n  &gt; \n  &gt; praise(person = \"Nick\")\n  Error in loadNamespace(x) : there is no package called ‘cli’\n  Calls: praise ... loadNamespace -&gt; withRestarts -&gt; withOneRestart -&gt; doWithOneRestart\n  Execution halted\n\n❯ checking dependencies in R code ... WARNING\n  '::' or ':::' import not declared from: ‘cli’\n\n1 error ✖ | 1 warning ✖ | 0 notes \nThis all stems from this warning:\n❯ checking dependencies in R code ... WARNING\n  '::' or ':::' import not declared from: ‘cli’\nThis says we need to declare importing the cli package. To do that we use the use_package() function.\n\n8.2.1 use_package(&lt;pkg&gt;) andpkg::fun()`\nWe need to give special instructions to our R package so it knows to depend on the cli package. We do so with the use_package() function:\nuse_package(\"cli\")\nWhich gives us a nice chatty response from usethis:\n✔ Adding cli to Imports field in DESCRIPTION.\n☐ Refer to functions with `cli::fun()`.\n\n\n\n\n\n\nNoteYour turn\n\n\n\n\nEnsure you have cli::cli_inform(...)\ncall use_package(cli)\n\n\n\nIf you look at the DESCRIPTION file, you’ll see this new Imports field:\nPackage: praiseme\nTitle: What the Package Does (One Line, Title Case)\nVersion: 0.0.0.9000\nAuthors@R: \n    person(\"Nicholas\", \"Tierney\", , \"nicholas.tierney@gmail.com\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"https://orcid.org/0000-0003-1460-8722\"))\nDescription: What the package does (one paragraph).\nLicense: MIT + file LICENSE\nEncoding: UTF-8\nLanguage: en-GB\nRoxygen: list(markdown = TRUE)\nRoxygenNote: 7.3.3\nImports: \n    cli\nThe Imports field is where R lists the R package it depends upon. This is so when you install this package, R can also make sure you have those packages installed.\n\n\n\n\n\n\nTipHow many dependencies should you have?\n\n\n\nMy opinion is you should depend on as many R packages as you like! It’s far faster, I think, to depend on packages that get the job done, and then maybe later trim back some dependencies and rewrite code.\nMy reasoning is that it is (generally) really cheap to add dependencies, but more expensive (for my brain), to write them from scratch.\nSo, be greedy, add dependencies, then prune back.\n\n\n\n\n\n\n\n\nTipCheatsheets\n\n\n\n\n\nThere is a great cheatsheet for package development that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out the PDF.\n\n\n\n\n\n\n\n\n\nCautionThe tidyverse package is not a dependency in packages\n\n\n\n\n\nBecause the purpose of the R package tidyverse is only really to load other R packages, it does not contain functions. Don’t put tidyverse in imports.\n\n\n\n\n\n\n\n\n\nCautionManaging conflicts in scripts with conflicted\n\n\n\n\n\nOutside of the R package development world, it’s a good idea to proactively manage function conflicts. Lest you use stats::filter() instead of dplyr::filter()\nSee the conflicted R package for more on this idea.\n\n\n\n\n\n\n\n\n\nCautionImports vs Depends, pkg versions\n\n\n\n\n\n\nImports vs Depends. We only really use Imports. Don’t use Depends unless you’re building an extension package, e.g., something that works with ggplot2, where it doesn’t make sense to have the package without ggplot2. Depends is like having library(pkg). Generally, don’t do it.\nIt’s usually a good idea to state package versions after their name in Imports. Find out the package name with packageVersion(\"pkg\"). Generally onlt do &gt;=, and not == and never &lt;\n\n\n\n\nNow we are going to discuss how to add tests to your package. This helps build upon your existing skills and will be useful as it helps ensure your package behaves are you expect.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Use other packages</span>"
+    ]
+  },
+  {
+    "objectID": "use-tests.html",
+    "href": "use-tests.html",
+    "title": "9  Using tests with testthat",
+    "section": "",
+    "text": "As we discussed earlier, one of the main workflows in R will be the following:\n\nEdit R functions\nload_all() (or keyboard shortcut Ctrl/Cmd+Shift+L)\nExplore how R functions work, do they behave as you expect\nRepeat 1-3 until satisfied\nPerform devtools::check()\n\nStep 3 is this informal approach to clarifying that your code behaves as you expect. You could imagine as your code becomes more complex, you can’t always informally check everything in the console. This is where tests come in.\nCompared to the informal approach of checking if the code behaves as you expect by working in the console, tests are a formal way to ensure that your code works as you would expect.\nWe are going to briefly touch on writing some very simple tests, but overall I think tests give you three benefits:\n\nThey force you to revisit your own code. In doing so, you review your code to ensure it behaves as you expect, which also presents an opportunity to fix any bugs, or improve how you wrote the original code\nThey give you freedom to make changes in your code. If you have a well-tested code R package, you are more or less free to make large scale changes on your code. If your tests fail, then you know you’ve broken something\nOutside confidence from others. If they see that your code has good tests, then it lends your code to having a high degree of trust.\n\nThere are a variety of testing approaches in R, we are going to use the testthat package, as it integrates well with usethis and devtools.\nYou establish your tests with:\nusethis::use_testthat()\nThis gives you the following output:\n✔ Adding testthat to Suggests field in DESCRIPTION.\n✔ Adding \"3\" to Config/testthat/edition.\n✔ Creating tests/testthat/.\n✔ Writing tests/testthat.R.\n☐ Call usethis::use_test() to initialize a basic test file and open\n  it for editing.\nThis sets up some boilerplate code so you don’t have to worry about creating directories like tests/testthat and make the other adjustments.\nLet’s follow its advice and add a test with:\nuse_test(\"praise\")\nThis gives us the following output:\n✔ Writing tests/testthat/test-praise.R.\n☐ Modify tests/testthat/test-praise.R.\nIt also opens a file named test-praise.R, which saves you the hassle of creating that file.\nIt even comes with some example code!\ntest_that(\"multiplication works\", {\n  expect_equal(2 * 2, 4)\n})\nThis test reads as:\n\nWe expect 2*2 to be equal to 4\n\nIf you run the test, by running devtools::test() in the console, you will see the test output.\nLet’s write a test for our praise functions.\nThis will check that the praise contains the name of the person. We can do this with expect_message(), a function taking two arguments: the object, and the expected contents. In our case:\ntest_that(\"Praise contains the name of the person\", {\n  expect_message(praise(\"Nick\"), \"Nick\")\n})\nThis is essentially asking:\n\nDoes this praise message contain “Nick” ?\n\nYou can now run devtools::test() in the console:\nℹ Testing praiseme\n✔ | F W  S  OK | Context\n✔ |          1 | praise                                              \n\n══ Results ══════════════════════════════════════════════════════════\n[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]\n\n\n\n\n\n\nTipYour Turn: add your first test\n\n\n\n\nAdd a unit test with:\n\ntest_that(\"Praise contains the name of the person\", {\n  expect_message(praise(\"Nick\"), \"Nick\")\n})\n\nRun devtools::test() Does it pass?\nAdd another unit test - does it pass? Why? Why not?\n\ntest_that(\"Praise contains the name of the person\", {\n  expect_message(praise(\"Nick\"), \"Chitra\")\n})\n\n(Extension). Explore snapshot testing - see the vignette, snapshotting, for more information.\n\n\n\nFrom here, we are going to get our package up online on git and github!",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using tests with `testthat`</span>"
+    ]
+  },
+  {
+    "objectID": "push-online.html",
+    "href": "push-online.html",
+    "title": "10  Pushing it online",
+    "section": "",
+    "text": "10.1 use_git()\nWe’ve got all this locally, and that’s great, now it is time to share it with the world!\nIf all went well with installation, then there are two steps to making this available publicly.\nWe can establish a git repository with:\nWhich does:\nAfter git is set up, we want to put it somewhere online. In this instance, we want to use GitHub, but other alternatives exist, such as codeberg, gitlab, and bitbucket.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Pushing it online</span>"
+    ]
+  },
+  {
+    "objectID": "push-online.html#use_git",
+    "href": "push-online.html#use_git",
+    "title": "10  Pushing it online",
+    "section": "",
+    "text": "use_git()\n\n\ninitialise a git repository\nasks you to commit files\nother setup\nMay ask you to restart RStudio to establish the git pane\n\n\n\n\n\n\n\nNoteDemo: Using git\n\n\n\n\nMake a small change to the praise function to change the compliment used.\nUnpack the git pane\nUnpack diff changes\n\n\n\n\n\n\n\n\n\nTipYour Turn: use_git()\n\n\n\n\nRun usethis::use_git() and follow prompts\nExplore the git pane\nExplore making changes to files and seeing changes in git\nNotice that you can commit, but you cannot “push”\n\n\n\n\n\n\n\n\n\nNoteDemo: This commit will…\n\n\n\n\nGenerally, you want to finish the sentence, “this commit will…” as a way to structure your commit messages.\nDemo emoji github lookup, so you add fun things like rockets to your commit messages: https://gist.github.com/rxaviers/7360908",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Pushing it online</span>"
+    ]
+  },
+  {
+    "objectID": "push-online.html#use_github",
+    "href": "push-online.html#use_github",
+    "title": "10  Pushing it online",
+    "section": "10.2 use_github()",
+    "text": "10.2 use_github()\nThe usethis package really does make our lives enormously easier here. They’ve got a little handy function called use_github() which does the following key things:\n\nensures the project uses git\ncreates the repo on github\npushes it to github\n\nThis saves us a bit of time, and honestly, feels like a bit of magic.\n\n\n\n\n\n\nTipDemo: Features of GitHub\n\n\n\nThere’s a lot of things about github!\n\nissues\nreleases\nmilestones\nprojects\n\nWhat questions do you have about github from here?",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Pushing it online</span>"
+    ]
+  },
+  {
+    "objectID": "push-online.html#how-to-use-git-and-github",
+    "href": "push-online.html#how-to-use-git-and-github",
+    "title": "10  Pushing it online",
+    "section": "10.3 How to use git and github",
+    "text": "10.3 How to use git and github\nFor the most part, we want to follow this process:\n\nMake changes to package\nload_all()\nEnsure it works as expected, through informal/formal testing\nSelect changes\nWrite commit message\nPush to github\n\nRemember this phrase:\n\ncommit early, commit often.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Pushing it online</span>"
+    ]
+  },
+  {
+    "objectID": "push-online.html#up-next-readme",
+    "href": "push-online.html#up-next-readme",
+    "title": "10  Pushing it online",
+    "section": "10.4 Up next: README",
+    "text": "10.4 Up next: README\nUp next, let’s add a README, so we can share a small example of how to use our package!",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Pushing it online</span>"
+    ]
+  },
+  {
+    "objectID": "add-readme.html",
+    "href": "add-readme.html",
+    "title": "11  Adding a README file",
+    "section": "",
+    "text": "Now that we’ve got our package onto github, let’s add a nice landing page, in the form of a README file.\nA README for a package should aim to answer the following questions:\n\nWhat is your package?\nWhy should we use it?\nHow do we use it?\n\nWe can set up the README with the following command:\nuse_readme_rmd()\nWhich tells us the following:\n✔ Writing README.Rmd.\n✔ Adding \"^README\\\\.Rmd$\" to .Rbuildignore.\n☐ Modify README.Rmd.\n✔ Writing .git/hooks/pre-commit.\nEssentially this means:\n\nDon’t add the README.Rmd when building the package\nRemember to edit the .Rmd (not the md file it creates)\nAdds a little note that will not let you just commit the README.Rmd unless the README.md has been updated (this is called a pre-commit).\n\nEssentially, the README.Rmd file allows us to demonstrate our package - in a similar way to how we have a vignette.\nSome good examples of R package READMEs:\n\ndplyr\ndatapasta\nskimr\nmagick\nvisdat\n\n\n11.0.1 How to write the README, though?\nWriting documentation can be a bit hard, but here are some general tips:\n\nTake the vignette, make it smaller.\nTake the examples, put them in there.\nRemember that done is better than perfect.\n\n\n\n\n\n\n\nTipA common pitfall with README.Rmd\n\n\n\n\nRemember to add library(pkg) to your README\nRemember to build the package before you knit!\n\nYou can do this with build_readme() (which builds the package and knits the README file)",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Adding a README file</span>"
+    ]
+  },
+  {
+    "objectID": "next-steps.html",
+    "href": "next-steps.html",
+    "title": "12  Next Steps",
+    "section": "",
+    "text": "12.0.1 Using Continuous Integration\nYou’ve got your R package built, and while it is simple, it does contain all the core pieces of an R package! Here are some next steps that I would recommend you pursue to make your R package even better.\nIt’s nice to run tests and checks locally, but we can actually set things up to happen automatically every time we push to GitHub.\nTo do this, run:\nAnd follow the prompts",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Next Steps</span>"
+    ]
+  },
+  {
+    "objectID": "next-steps.html#adding-a-website-with-pkgdown",
+    "href": "next-steps.html#adding-a-website-with-pkgdown",
+    "title": "12  Next Steps",
+    "section": "12.1 Adding a website with pkgdown",
+    "text": "12.1 Adding a website with pkgdown\nWe’ve got our package written! Now let’s make it even more attractive to users by making a fancy website.\nThis has now been made so easy thanks to pkgdown. Essentially, you run:\n`use_pkgdown_github_pages()`\nAnd you follow the steps from here.\nSome tips for structure your R Package website:\n\nlook at other packages for inspiration on structure\ntry to use a different default theme\nR packages book\nofficial R docs\nrOpenSci docs\nR Package Essentials\n\n\n12.1.1 R Universe\nR Universe presents a middle ground between your package on github, and your package on CRAN.\n\nSee https://r-universe.dev/search\nSimilar to CRAN - you get speed of builds thanks to binary builds.\nLinked to your github\nFewer barriers to entry\nLearn more at https://docs.r-universe.dev/publish/set-up.html\n\n\n\n12.1.2 Publish to CRAN\nBefore you publish on CRAN, you will need to go through some more hoops. I would recommend at least skim reading the R packages book: https://r-pkgs.org/\n\nA few barriers\nvery stable, fast\nRequires constant maintenance from you - usually need to respond to CRAN requests within 2 weeks\nI would recommend reading https://r-pkgs.org/release.html",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Next Steps</span>"
+    ]
+  },
+  {
+    "objectID": "extensions.html",
+    "href": "extensions.html",
+    "title": "13  Extension exercises",
+    "section": "",
+    "text": "13.1 tests",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Extension exercises</span>"
+    ]
+  },
+  {
+    "objectID": "extensions.html#tests",
+    "href": "extensions.html#tests",
+    "title": "13  Extension exercises",
+    "section": "",
+    "text": "Add snapshot tests\nExplore random features of adding sampling and how this interacts\nget this to fail once to demonstrate the importance of setting seed",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Extension exercises</span>"
+    ]
+  }
+]
