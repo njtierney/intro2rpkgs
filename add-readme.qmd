@@ -29,8 +29,6 @@ Essentially this means:
 - Remember to edit the .Rmd (not the md file it creates)
 - Adds a little note that will not let you just commit the README.Rmd unless the README.md has been updated (this is called a pre-commit).
 
-[Here's a commit of this](https://github.com/njtierney/learned/pull/2/commits/0ce4e30647d2ea86f010c49a21df196e9c374fb1)
-
 Essentially, the README.Rmd file allows us to demonstrate our package - in a similar way to how we have a vignette. 
 
 Some good examples of R package READMEs:
@@ -49,10 +47,10 @@ Writing documentation can be a bit hard, but here are some general tips:
 - Take the examples, put them in there.
 - Remember that done is better than perfect.
 
-Here's [my (quick) commit](https://github.com/njtierney/learned/pull/2/commits/4be9bc46099156efe44d4f7b6d50de5a399ed4f4) of making a minimal README.Rmd
-
 ::: {.callout-tip title="A common pitfall with README.Rmd"}
+
 - Remember to add `library(pkg)` to your README
 - Remember to build the package before you knit!
   - You can do this with `build_readme()` (which builds the package and knits the README file)
+  
 :::
