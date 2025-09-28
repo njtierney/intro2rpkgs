@@ -214,6 +214,8 @@ In general for this course I think you are best off with a recent version of R, 
 
 ## Software setup: git and github
 
+Setting up git and github can sometimes take a little while, in the course we will go through the bulk of the package guide before coming back to this.
+
 Briefly, `git` is essentially a way of managing versions and changes. You can think of it like a product such as dropbox, but with super powers. You can go back in time, you can make copies for changing, and delicately and precisely merge them back in, or leave them where they are.
 
 Your software needs a home. You'll typically start with your project on your laptop or computer. GitHub is where you can store it online. The benefits to sharing your work on github are many, but my personal top reasons are:

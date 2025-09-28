@@ -1,5 +1,50 @@
 ## Next Steps
 
+- Understand next steps for advanced package development, including:
+	- Automatically run tests with continuous integration via GitHub Actions.
+	  - use_github_action()
+	- Create professional package websites using `pkgdown`.
+	  - `use_pkgdown_github_pages()`
+	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
+	  - showcase
+
+## Using Continuous Integration
+
+It's nice to run tests and checks locally, but we can actually set things up to happen automatically every time we push to GitHub.
+
+To do this, run:
+
+```r
+#  (singular, not plural)
+use_github_action()
+```
+
+And follow the prompts
+
+
+- This is all much easier than it used to be
+- Explain that there is a game of "watching the green lights"
+- Explain test coverage
+  - see `covr::report()`
+
+
+
+## Adding a website
+
+We've got our package written! Now let's make it even more attractive to users by making a fancy website.
+
+This has now been made so easy thanks to `pkgdown`. Essentially, you run:
+
+```r
+`use_pkgdown_github_pages()`
+```
+
+## Package website tips
+
+- look at other packages for inspiration on structure
+- try to use a different default theme
+
+
 - R packages book
 - official R docs
 - rOpenSci docs

@@ -56,16 +56,16 @@ It felt like I could do it. Plus, I like cats.
 So the idea with this book is to empower you in a similar way to make your own R package. We will do this by focussing on a really simple example: a function that delivers praise. It will look like this:
 
 ```{r}
-praiseme <- function(){
+praise <- function(){
   "Hey, you're really great!"
 }
 
-praiseme()
+praise()
 ```
 
 We will go through the whole process of all the bits and pieces that sit around an R package: documentation, metadata (DESCRIPTION file), tests, checks, git, github, even a website.
 
-I know `praiseme()` is a simple function, and while I think it would be great to teach a __really useful example__, where you would learn how to write __really useful functions you would use every day__. 
+I know `praise()` is a simple function, and while I think it would be great to teach a __really useful example__, where you would learn how to write __really useful functions you would use every day__. 
 
 I think this is not a bad idea, but I think it gets in the way of the main goal: learning how to write an R package.
 

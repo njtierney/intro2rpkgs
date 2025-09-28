@@ -196,85 +196,11 @@ So, be greedy, add dependencies, then prune back.
 
 ::: 
 
-- Add tests for behaviour with snapshots - get this to fail once to demonstrate the importance of setting seed
-- Add tests that it returns text
-
-- Other future extensions
- - Adding `praise` to startup
- - Randomly add a nice synonym
- - Choose a random phrase
- - Add progress bars to demonstrate thinking
-- use git and github to get it online
-- add a README
-- Use Git and GitHub to put your R package online.
-  - git + github motivation
-  - git installation time
-  - use_git()
-  - use_github()
-- Understand next steps for advanced package development, including:
-	- Automatically run tests with continuous integration via GitHub Actions.
-	  - use_github_action()
-	- Create professional package websites using `pkgdown`.
-	  - `use_pkgdown_github_pages()`
-	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
-	  - showcase
-
-Let's make it that we can use a name 
- tldrlegal https://tldrlegal.com/ What is the folder structure? What are we even looking at? Run devtools::check() They could submit this right now!
-
-## The workflow of package development
-
-One of the major workflows during R package development is this:
-
-1.  Edit R functions
-2.  `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
-3.  Edit R functions.
+Now We are going to discuss how to add tests to your package. This helps build upon your existing skills and will be useful as it helps ensure your package behaves are you expect.
 
 ::: {.callout-tip title="Cheatsheets" collapse="true"}
 There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
 :::
-
-Let's try out our R package. To do this, I'm going to recommend you create a special R file, sometimes called a "scratch file". It lives inside a folder called `inst`, which is typically not touched by R package building. This is a useful trick if you want to have a way to play around with some R code, keeping it inside your R package.
-
-::: {.callout-note title="Workflow ideas: a scratch file" collapse="true"}
-Sometimes you want to have a little scratch pad to write all your practice code. One place where you can do this is in a "scratch" file.
-
-Create a scratch file:
-
-1.  Create a directory `inst`
-2.  Inside that directory, create an R file called `scratch.R` (note that this can actually be called anything, but `scratch.R` is what I use)
-3.  Write `library(praiseme)` inside `scratch.R`
-:::
-
-Does this work for you?
-
-Let's pick this up in the next section, "How to use extra packages"
-
-
-## Demo in `scratch`
-
-Now that we've done this, let's install the package, and then go to `scratch.R`
-
-I then get this error:
-
-```
-> clean_education_data(raw_education_2014)
-Error in clean_education_data(raw_education_2014) : 
-  could not find function "clean_education_data"
-```
-
-However, if we do load all, with:
-
-```r
-load_all(".")
-```
-
-Then it works!
-
-But what gives with the function not being available? Let's have a look inside `learned` by using `::`:
-
-There's nothing in there! Now let's focus on getting that working, which will involve learning about **documenting our code!**
-
 
 ::: {.callout-caution title="The `tidyverse` package is not a dependency in packages" collapse="true"}
 

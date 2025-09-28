@@ -1,34 +1,109 @@
 
-- Add tests for behaviour with snapshots - get this to fail once to demonstrate the importance of setting seed
-- Add tests that it returns text
+# Using tests with `testthat`
 
-- Other future extensions
- - Adding `praise` to startup
- - Randomly add a nice synonym
- - Choose a random phrase
- - Add progress bars to demonstrate thinking
-- use git and github to get it online
-- add a README
-- Use Git and GitHub to put your R package online.
-  - git + github motivation
-  - git installation time
-  - use_git()
-  - use_github()
-- Understand next steps for advanced package development, including:
-	- Automatically run tests with continuous integration via GitHub Actions.
-	  - use_github_action()
-	- Create professional package websites using `pkgdown`.
-	  - `use_pkgdown_github_pages()`
-	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
-	  - showcase
+As we discussed earlier, one of the main workflows in R will be the following:
 
-Let's make it that we can use a name 
- tldrlegal https://tldrlegal.com/ What is the folder structure? What are we even looking at? Run devtools::check() They could submit this right now!
+1. Edit R functions
+2. `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
+3. Explore how R functions work, do they behave as you expext
+4. Repeat 1-3 until satisfied
+5. Perform `devtools::check()`
 
-## The workflow of package development
+Step 3 is this informal approach to clarifying that your code behaves as you expect. You could imagine as your code becomes more complex, you can't always informally check everything in the console. This is where tests come in. Compared to the **informal** approach of checking if the code behaves as you expect, tests are a **formal** way to ensure that your code works as you would expect.
 
-One of the major workflows during R package development is this:
+We are going to briefly touch on writing some very simple tests, but overall I think tests give you three benefits:
 
-1.  Edit R functions
-2.  `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
-3.  Edit R functions.
+1. They force you to revisit your own code. In doing so, you review your code to ensure it behaves as you expect, which also presents an opportunity to fix any bugs, or improve how you wrote the original code
+2. They give you freedom to make changes in your code. If you have a well-tested code repository, then you are more or less free to make large scale changes on your code. If your tests fail, then you know you've broken something
+3. Outside confidence from others. If they see htat your code has good tests, then it lends your code to having a high degree of trust.
+
+There are a variety of testing approaches in R, we are going to use the `testthat` package, as it integrates well with `usethis` and `devtools`.
+
+You establish your tests with: 
+
+```r
+usethis::use_testthat()
+```
+
+This gives you the following output:
+
+```
+✔ Adding testthat to Suggests field in DESCRIPTION.
+✔ Adding "3" to Config/testthat/edition.
+✔ Creating tests/testthat/.
+✔ Writing tests/testthat.R.
+☐ Call usethis::use_test() to initialize a basic test file and open
+  it for editing.
+```
+
+This sets up some boilderplate code so you don't have to worry about creating directories like `tests/testthat` and make the other adjustments.
+
+Let's follow its advice and add a test with:
+
+```r
+use_test("praise")
+```
+
+This gives us the following output:
+
+```
+✔ Writing tests/testthat/test-praise.R.
+☐ Modify tests/testthat/test-praise.R.
+```
+
+It also opens a file named `test-praise.R`, which saves you the hassle of creating that file.
+
+It even comes with some example code!
+
+```r
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
+})
+```
+
+To start, we are going to create two tests. The first test will be one that checks the praise contains the name of the person. We can do this with `expect_message`, which is a function that takes two main arguments, the object, and the expected contents. In our case:
+
+```r
+test_that("Praise contains the name of the person", {
+  expect_message(praise("Nick"), "Nick")
+})
+```
+
+This is essentially asking: 
+
+> "Does this praise message contain "Nick" ?"
+
+You can now run `devtools::test()` in the console:
+
+```
+ℹ Testing praiseme
+✔ | F W  S  OK | Context
+✔ |          1 | praise                                              
+
+══ Results ══════════════════════════════════════════════════════════
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
+```
+
+:::{.callout-tip, title="Your Turn: add your first test"}
+
+1. Add a unit test with:
+
+```r
+test_that("Praise contains the name of the person", {
+  expect_message(praise("Nick"), "Nick")
+})
+```
+
+2. Run `devtools::test()` Does it pass?
+
+3. Add another unit test - does it pass? Why? Why not?
+
+```r
+test_that("Praise contains the name of the person", {
+  expect_message(praise("Nick"), "Chitra")
+})
+```
+
+:::
+
+From here, we are going to get our package up online on git and github!

@@ -14,8 +14,8 @@ So, let's write the R package!
 
 ## R Package using devtools
 
-- Select "R Package Using devtools". 
-- To find this you may need to scroll down in the menu.
+-   Select "R Package Using devtools".
+-   To find this you may need to scroll down in the menu.
 
 ![](images/clipboard-509429837.png)
 
@@ -27,7 +27,7 @@ In "Directory Name" write the name of the package. In our case, "praiseme"
 
 ## Verify the project **subdirectory** path does not contain any spaces
 
-This is because of some inherent limitations to how this part of the software world words. Here are some good and bad examples
+This is because of some inherent limitations to how this part of the software world works. Here are some good and bad examples:
 
 -   Good:
 
@@ -53,7 +53,7 @@ This is because of some inherent limitations to how this part of the software wo
 
 ![](images/clipboard-1224214680.png)
 
-## Click More ---\> "Configure Build Tools…" 
+## Click More ---\> "Configure Build Tools…"
 
 ![](images/clipboard-1004371799.png)
 
@@ -63,11 +63,11 @@ This is because of some inherent limitations to how this part of the software wo
 
 ### Under "Use roxygen to generate:" Check the following fields
 
-- "Rd files"
-- "Collate field"
-- "NAMESPACE file"
-- "R CMD check"
-- "source and binary package builds"
+-   "Rd files"
+-   "Collate field"
+-   "NAMESPACE file"
+-   "R CMD check"
+-   "source and binary package builds"
 
 ![](images/clipboard-3347104313.png)
 
@@ -192,6 +192,12 @@ usethis::use_r("praise")
 
 Which gives us:
 
+```         
+☐ Modify R/praise.R.
+```
+
+And opens the R file for us.
+
 And as a gif:
 
 ![](images/clipboard-2452888925.gif)
@@ -220,13 +226,15 @@ Then, we can invoke our praise any time we want, by writing the following:
 praise()
 ```
 
-This is a function, and if you haven't seen it before, it allows you to repeat the same code again, but it's real power is in allowing you to express complex ideas.
+This is a function, and if you haven't seen it before, it allows you to repeat the same code again, but it's real power is in **allowing you to express complex ideas.**
 
-We will make this function more complex and awesome, know that. But just know that for now it will be very simple.
+We will make this function more complex and awesome, know that.
+
+For now, it will be very simple.
 
 So now, save that file.
 
-Now, how do you go about using this function? We can highlight the code and run it in the console, but we want the cool experience of restarting, and being able to do
+How do you go about using this function? We can highlight the code and run it in the console, but we want the cool experience of restarting, and being able to run something like the following:
 
 ``` r
 library(praiseme)
@@ -235,20 +243,26 @@ praise()
 
 And have it give us our nice praise!
 
-Let's do an install + Restart.
+::: {.callout-tip title="Your turn: restart and install"}
 
-First, restart your R session, so we can start from scratch. Then:
+First, restart your R session, so we can start from scratch. You can find this under:
 
-Build \>\> Clean and Install:
+-   session \>\> Restart R
+-   Or a keyboard shortcut: Cmd + Shift + 0 (on windows/linux: Ctrl + Shift + F10 )
+
+Then:
+
+-   Build \>\> Clean and Install:
 
 ![](images/clipboard-1998502099.png)
 
 Now try:
 
-```r
+``` r
 library(praiseme)
 praise()
 ```
+:::
 
 And it....doesn't work?
 
