@@ -8,11 +8,11 @@ The reason is that we need to tell R to export it, so that it becomes available 
 library(praise)
 ```
 
-Now, you might have noticed that you can source, or run the code to get access to the function. But this is similar, but actually different to exporting the code.
+You might have noticed that you can source, or run the code to get access to the function. This is similar, but actually different to exporting the code.
 
 You can think of exporting like only running the code for very select parts of your package - and only making certain parts available to the user when they run `library(pkgname)`.
 
-Exporting is a special process in R, and we make our function available by *exporting it* using `roxygen2`.
+Exporting is a special process in R, and we make our function available using `roxygen2`.
 
 In short, `roxygen2` provides us with nifty syntax to give documentation to our functions, which also allows them to be exported.
 
@@ -40,9 +40,9 @@ praise <- function() {
 }
 ```
 
-You can think of roxygen as special comments - notice that they are really similar to R comments! It is `#` + `'`. You can add special labels with `@`. In our case, we will just look at the ones that were created with the insert roxygen skeleton helper. We will look at more of these soon.
+You can think of roxygen as special comments - notice that they are really similar to R comments! It is the comment, `#` plus the single quote, `'` - so `#'`. You can add special labels with `@`. In our case, we will just look at the ones that were created with the insert roxygen skeleton helper. We will look at more of these soon. But if you want to see all of them, see the [roxygen2 documentation](https://roxygen2.r-lib.org/articles/rd.html).
 
-Which we can then populate:
+So we populate the roxygen skeleton, like so:
 
 ``` r
 #' Deliver Praise
@@ -57,11 +57,11 @@ praise <- function() {
 }
 ```
 
-These are special comments that will ultimately end up as documentation for our code!
+These are special comments that will ultimately end up as documentation for our code.
 
-What do all these parts do?
+Let's talk about what these parts do.
 
-- first line "Deliver Praise" could actually be written as "`@title Deliver Praise`", but R is clever enough that it knows the top line is a title. If you want to be really explicit, you can do `#' @title Deliver Praise`
+- first line "Deliver Praise" could actually be written as "`@title Deliver Praise`", but roxygen is clever enough that it knows the top line is a title. If you want to be really explicit, you can do `#' @title Deliver Praise`
 - `@returns` tells the user what this returns
 - `@export` tells R to export this function to make it available to the user (**this is what we are after!**)
 
@@ -126,10 +126,12 @@ praise()
 So to recap:
 
 - We add special markup "roxygen" to document our `praise` function
+- We make sure to add the `#' @export` line
 - We run `devtools::document()`
 - This then:
   - Puts the `praise` function in NAMESPACE
   - Creates documentation and places it in `man/praise.Rd`
+  - Which makes it available when the user installs the package and runs `library(praiseme)`
 
 ::: {.callout-tip title="Some history on NAMESPACE and .Rd files" collapse="true"}
 
