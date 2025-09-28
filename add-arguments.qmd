@@ -75,7 +75,11 @@ Which takes `name` and pastes it between the text around it - similar to our exa
 
 `paste` is a very powerful function! But did you notice it has added in an **extra space** before the comma. 
 
-This is because of a default argument of `paste`, `sep = " "`. This says: Separate each new word with a space. We can get around this by specifying `sep = ""`:
+This is because of a default argument of `paste`, `sep = " "`. 
+
+This says: Separate each new word with a space. 
+
+We can get around this by specifying the argument `sep = ""`:
 
 ```{r}
 paste("Hey ", name, ", You're really awesome!", sep = "")
@@ -124,7 +128,7 @@ The `load_all()` function means you don't need to go through the whole process b
 :::
 
 ::: {.callout-tip title="Cheatsheets" collapse="true"}
-There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
+There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
 :::
 
-This package is looking pretty nice! Let's see how close it is to being ready by running it through the gamut of `devtools::check()`
+This package is looking pretty nice! Let's see how close it is to being ready by running it through the gamut of `devtools::check()`. This means we could feasibly get this onto CRAN!
