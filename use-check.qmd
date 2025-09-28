@@ -10,7 +10,13 @@ This might seem advanced, and in some ways it is - `devtools::check()` does a lo
 
 Let's run it!
 
-:::{.callout-tip, title="Your turn: run `devtools::check()`"} 1. Run `devtools::check()` in the console 2. See what checks we need to fix :::
+:::{.callout-tip title="Your turn: run `devtools::check()`"} 
+
+1. Run `devtools::check()` in the console 
+
+2. See what checks we need to fix 
+
+:::
 
 You should see something like the following key output when you run `devtools::check()`:
 
@@ -71,15 +77,19 @@ Generally speaking, you want to fix these in the order that they appear:
 
 One caveat I would add to this is that sometimes it can feel like an easy win to fix the smallest number first. So for example if I had 10 errors and 1 warning, I might fix the warning first because that feels a little bit more achievable.
 
+Another caveat is that as you get more experience you will understand that sometimes one problem is creating several WARNINGs or NOTEs or ERRORs.
+
 ### Solve one thing at a time
 
 It is worth trying your best to solve exactly one problem at a time. Work on solving that one problem first, then run `check()` and move on to the second one once that is solved.
 
-The reason is that sometimes as we fix things, we sometimes break things more. If we are just trying to fix one thing at a time, then we can know that any changes we made are more directly tied to that new issue.
+The reason is that sometimes as we fix things, we can break them further. 
 
-As you get more experienced, you will understand how to fix problems faster, and how to fix multiple things. 
+If we are just trying to fix one thing at a time, then we can know that any changes we made are more directly tied to that new issue.
 
-But when you are just starting out with package development, fix one thing at a time.
+As you get more experienced, you will understand how to fix problems faster, and how to fix multiple things at the same time.
+
+But when you are just starting out with package development, **fix one thing at a time.**
 
 ### How to solve the error/warning/note
 
@@ -114,9 +124,9 @@ As you get more experienced, you will know very quickly what these kinds of erro
 
 In the `praise()` function we have the examples section, and we just call `praise()`. But we updated this function to take an argument. For example, `praise(name = "Nick")`.
 
-The error occurs because the example code, `praise()`, needs an argument in order to work. Fix it by adding an argument:
+The error occurs because the example code, `praise()`, needs an argument in order to work. Fix it by adding an argument in the example code.
 
-:::{.callout-tip, title="Your turn: Update example"}
+:::{.callout-tip title="Your turn: Update example"}
 
 1. Update your example code to reflect the new interface
 1. Run `devtools::document()`
@@ -166,7 +176,7 @@ This warning arises because we have an argument, `person`, in our function, but 
 We can solve this by adding 
 
 ```r
-#' @param argument-name Details on the argument
+#' @param argument-name Details on the argument.
 ```
 
 So in our case, something like the following:
@@ -186,7 +196,7 @@ So in our case, something like the following:
 
 We generally put parameters above `return`.
 
-:::{.callout-tip, title="Your Turn: update argument"}
+:::{.callout-tip title="Your Turn: update argument"}
 1. Update documentation to add a parameter
 1. Run `devtools::document()`
 1. Run `devtools::check()` to ensure the warning regarding arguments has gone away
@@ -248,7 +258,7 @@ It's important to pick a license for your code so others know how they should gi
 
 In any case, for our example, the MIT license is totally fine. We can apply this by running `usethis::use_mit_license()`:
 
-:::{.callout-tip, title="Your turn: `usethis::use_mit_license()`"} 
+:::{.callout-tip title="Your turn: `usethis::use_mit_license()`"} 
 
 1. Run: `usethis::use_mit_license()` 
 2. Run `devtools::check()` 
@@ -269,7 +279,12 @@ Which creates some files, and adds some text to .Rbuildignore.
 
 Now, let's see if this solved our `check()` problem.
 
-:::{.callout-tip, title="Your turn: Run `devtools::check()` again"} 1. Run `devtools::check()` 2. Has this returned all ticks? :::
+:::{.callout-tip title="Your turn: Run `devtools::check()` again"} 
+
+1. Run `devtools::check()` 
+2. Has this returned all ticks? 
+
+:::
 
 All going well, this will have resulted in us having our package pass all checks!
 
@@ -294,4 +309,4 @@ Well done! You have written an R package, and essentially you could submit this 
 4. If not, run steps 1-3 as needed
 5. If your code is working how you want, run `devtools::check()` to really make sure you've got everything working
 
-Now let's discuss another important topic - how to add other dependencies!
+Now let's discuss another important topic - how to use functions from other R packages in your package.
