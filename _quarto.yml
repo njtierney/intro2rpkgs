@@ -46,11 +46,11 @@ book:
     - "create-the-pkg.qmd"
     - "exporting-and-documenting.qmd"
     - "add-arguments.qmd"
-    - "how-to-use-extra-pkgs.qmd" # lots of extra work
     - "use-check.qmd"
+    - "how-to-use-extra-pkgs.qmd" # lots of extra work
+    - "add-tests.qmd"
     - "push-to-github.qmd" #
     - "add-readme.qmd"
-    - "add-tests.qmd"
     - "add-website.qmd"
     - "add-ci.qmd"
     - "publish.qmd" # on R universe

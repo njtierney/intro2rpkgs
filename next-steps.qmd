@@ -1,0 +1,13 @@
+## Next Steps
+
+- R packages book
+- official R docs
+- rOpenSci docs
+- R Package Essentials
+
+Submitting to CRAN
+
+Submitting to JOSS
+
+Submitting to rOpenSci
+

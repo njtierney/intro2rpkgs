@@ -67,14 +67,28 @@ name <- "Di"
 paste("Hey", name, ", You're really awesome!")
 ```
 
-`paste` is a very powerful function, but we can see that it has added in an extra spaces before the comma. This is because of a default argument of `paste`. We can get around that with `paste0`, which has zero spaces between phrases.
+Which takes `name` and pastes it between the text around it - similar to our example above:
+
+```{r}
+"Hey PERSON, You're really awesome!"
+```
+
+`paste` is a very powerful function! But did you notice it has added in an **extra space** before the comma. 
+
+This is because of a default argument of `paste`, `sep = " "`. This says: Separate each new word with a space. We can get around this by specifying `sep = ""`:
+
+```{r}
+paste("Hey ", name, ", You're really awesome!", sep = "")
+```
+
+Or, we can use another function, `paste0`, which sets that by default:
 
 ```{r}
 name <- "Di"
 paste0("Hey ", name, ", You're really awesome!")
 ```
 
-Now let's put this into action in the function:
+Now let's put this into the function:
 
 ```{r}
 praise <- function(name){
@@ -106,11 +120,11 @@ The `load_all()` function means you don't need to go through the whole process b
 2. Use `devtools::load_all()` to load the function 
 3. see if the output does what you want.
 4. Repeat 1-3 until you are happy with the output.
-
+5. Extension: Try changing the praise adjective with another argument!
 :::
 
 ::: {.callout-tip title="Cheatsheets" collapse="true"}
 There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
 :::
 
-This package is looking pretty nice - let's see how close it is to being ready by running it through the gamut of `devtools::check()`
+This package is looking pretty nice! Let's see how close it is to being ready by running it through the gamut of `devtools::check()`

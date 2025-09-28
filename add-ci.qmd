@@ -1,0 +1,18 @@
+## Using Continuous Integration
+
+It's nice to run tests and checks locally, but we can actually set things up to happen automatically every time we push to GitHub.
+
+To do this, run:
+
+```r
+#  (singular, not plural)
+use_github_action()
+```
+
+And follow the prompts
+
+
+- This is all much easier than it used to be
+- Explain that there is a game of "watching the green lights"
+- Explain test coverage
+  - see `covr::report()`

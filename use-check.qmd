@@ -1,6 +1,6 @@
 # Using `devtools::check()`
 
-So far we have written a very basic R package structure, and given it some documentation and examples.
+So far we have written a very basic R package structure, and given it some documentation and examples. We've even added our new praise function to have
 
 Now, let's see if we can get this to pass the bar - could this go onto CRAN?
 
@@ -12,23 +12,196 @@ Let's run it!
 
 :::{.callout-tip, title="Your turn: run `devtools::check()`"} 1. Run `devtools::check()` in the console 2. See what checks we need to fix :::
 
-You should see something like the following when you run `devtools::check()`:
+You should see something like the following key output when you run `devtools::check()`:
 
-![](images/clipboard-3990846964.gif)
-
-The key output from our check is the following message:
 
 ```         
-── R CMD check results ──────────────────────────────────────────── praiseme 0.0.0.9000 ────
+── R CMD check results ───────────────────── praiseme 0.0.0.9000 ────
 Duration: 4.9s
+
+❯ checking examples ... ERROR
+  Running examples in ‘praiseme-Ex.R’ failed
+  The error most likely occurred in:
+  
+  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+  > ### Name: praise
+  > ### Title: Deliver Praise
+  > ### Aliases: praise
+  > 
+  > ### ** Examples
+  > 
+  > praise()
+  Error in praise() : argument "person" is missing, with no default
+  Calls: praise -> paste0
+  Execution halted
 
 ❯ checking DESCRIPTION meta-information ... WARNING
   Invalid license file pointers: LICENSE
 
-0 errors ✔ | 1 warning ✖ | 0 notes ✔
+❯ checking Rd \usage sections ... WARNING
+  Undocumented arguments in Rd file 'praise.Rd'
+    ‘person’
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+
+1 error ✖ | 2 warnings ✖ | 0 notes ✔
 ```
 
-This tells us something is going on with the LICENSE file. Note that in the DESCRIPTION file we have the following:
+OK! There's a bit going on, let's discuss how to deal prioritise these messages.
+
+## How to deal with `devtools::check()` - errors, warnings, notes.
+
+at the end of the `devtools::check` above we got this final message:
+
+```
+1 error ✖ | 2 warnings ✖ | 0 notes ✔
+```
+
+### Order of operations: ERROR before WARNING before NOTE
+
+Generally speaking, you want to fix these in the order that they appear:
+
+1. Fix errors first, because they are larger more substantial problems
+2. Fix warnings second as they are less bad than errors
+3. Fix notes generally only when you are getting close to submit to CRAN
+
+One caveat I would add to this is that sometimes it can feel like an easy win to fix the smallest number first. So for example if I had 10 errors and 1 warning, I might fix the warning first because that feels a little bit more achievable.
+
+### Solve one thing at a time
+
+It is worth trying your best to solve exactly one problem at a time. Work on solving that one problem first, then run `check()` and move on to the second one once that is solved.
+
+The reason is that sometimes as we fix things, we sometimes break things more. If we are just trying to fix one thing at a time, then we can know that any changes we made are more directly tied to that new issue.
+
+As you get more experienced, you will understand how to fix problems faster, and how to fix multiple things. 
+
+But when you are just starting out with package development, fix one thing at a time.
+
+### How to solve the error/warning/note
+
+Break it into chunks. Let's look at the first error message above:
+
+```
+❯ checking examples ... ERROR
+  Running examples in ‘praiseme-Ex.R’ failed
+  The error most likely occurred in:
+  
+  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+  > ### Name: praise
+  > ### Title: Deliver Praise
+  > ### Aliases: praise
+  > 
+  > ### ** Examples
+  > 
+  > praise()
+  Error in praise() : argument "person" is missing, with no default
+  Calls: praise -> paste0
+  Execution halted
+```
+
+As you get more experienced, you will know very quickly what these kinds of errors mean. In this case, the error message has occurred under examples. I generally look for another place where there is an error message. In this case, I look at the last part:
+
+```
+  > ### ** Examples
+  > 
+  > praise()
+  Error in praise() : argument "person" is missing, with no default
+```
+
+In the `praise()` function we have the examples section, and we just call `praise()`. But we updated this function to take an argument. For example, `praise(name = "Nick")`.
+
+The error occurs because the example code, `praise()`, needs an argument in order to work. Fix it by adding an argument:
+
+:::{.callout-tip, title="Your turn: Update example"}
+
+1. Update your example code to reflect the new interface
+1. Run `devtools::document()`
+1. Run `devtools::check()`, ensure that the error message is no longer there
+
+You should have something like the following:
+
+```
+── R CMD check results ───────────────────── praiseme 0.0.0.9000 ────
+Duration: 6s
+
+❯ checking DESCRIPTION meta-information ... WARNING
+  Invalid license file pointers: LICENSE
+
+❯ checking Rd \usage sections ... WARNING
+  Undocumented arguments in Rd file 'praise.Rd'
+    ‘person’
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+
+0 errors ✔ | 2 warnings ✖ | 0 notes ✔
+```
+:::
+
+## Fixing warnings: undocumented arguments
+
+Let's focus on the warning regarding arguments, since this is a similar issue to what we were dealing with before:
+
+```
+❯ checking Rd \usage sections ... WARNING
+  Undocumented arguments in Rd file 'praise.Rd'
+    ‘person’
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+```
+
+This warning arises because we have an argument, `person`, in our function, but we don't have a corresponding piece of documentation for that argument.
+
+We can solve this by adding 
+
+```r
+#' @param argument-name Details on the argument
+```
+
+So in our case, something like the following:
+
+```r
+#' Deliver Praise
+#'
+#' @param person character. Name of person to deliver praise.
+#'
+#' @returns a message of praise
+#'
+#' @export
+#'
+#' @examples
+#' praise(person = "Nick")
+```
+
+We generally put parameters above `return`.
+
+:::{.callout-tip, title="Your Turn: update argument"}
+1. Update documentation to add a parameter
+1. Run `devtools::document()`
+1. Run `devtools::check()` to ensure the warning regarding arguments has gone away
+:::
+
+## Fixing warnings: LICENSE
+
+Running `check()` let's focus on the warning with the LICENSE:
+
+```
+❯ checking DESCRIPTION meta-information ... WARNING
+  Invalid license file pointers: LICENSE
+```
+
+This tells us something is going on with the LICENSE file. Note in the DESCRIPTION file we have the following:
 
 ``` dcf
 Package: praiseme
@@ -71,11 +244,16 @@ or
 
 There isn't a LICENSE file anywhere!
 
-It's important ti pick a license for your code sot hat others know how they should give you attribution. A good license is the MIT license, which essentially allows people to use yoru code for free and to commercialise it, but you cannot be held liable. I am not a lawyer, however, I would recommend that you choose your own license. I'd recommend reading the [chapter on licenses](https://r-pkgs.org/license.html) in the R packages book, and also consulting the [TLDR legal page](https://www.tldrlegal.com/).
+It's important to pick a license for your code so others know how they should give you attribution. A good license is the MIT license, which essentially allows people to use yoru code for free and to commercialise it, but you cannot be held liable. I am not a lawyer, however, I would recommend that you choose your own license. I'd recommend reading the [chapter on licenses](https://r-pkgs.org/license.html) in the R packages book, and also consulting the [TLDR legal page](https://www.tldrlegal.com/).
 
 In any case, for our example, the MIT license is totally fine. We can apply this by running `usethis::use_mit_license()`:
 
-:::{.callout-tip, title="Your turn: `usethis::use_mit_license()`"} 1. Run: `usethis::use_mit_license()` 2. Run `devtools::check()` :::
+:::{.callout-tip, title="Your turn: `usethis::use_mit_license()`"} 
+
+1. Run: `usethis::use_mit_license()` 
+2. Run `devtools::check()` 
+
+:::
 
 Running `usethis::use_mit_license()` we see the following text:
 

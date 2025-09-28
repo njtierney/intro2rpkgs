@@ -1,0 +1,296 @@
+
+## Adding nicer printing
+
+We're going to level up our message by adding some styling to the message using the [`cli`](https://cli.r-lib.org/) package.
+
+I want to introduce this package for three reasons:
+
+1. It will make it easier to write useful messages to users
+1. It will help with writing good error messages
+1. It will help make your package look sleek and modern
+
+You are going to modify your function to look like this:
+
+```{r}
+praise <- function(name){
+  cli::cli_inform("Hey {name}, You're so awesome!")
+}
+```
+
+
+::: {.callout-tip title="paste, sprintf, glue, and cli" collapse="true"}
+There are always so many different ways to generate solutions. It is worthwhile knowing more about how some different approaches. I wrote about this a blog post, ["Glue magic Part 1"](https://www.njtierney.com/post/2019/07/07/glue-magic-p1/)
+:::
+
+Notice that this is really similar to our previous template:
+
+```{r}
+"Hey PERSON, You're so awesome!"
+```
+
+The way this works is it replaces the thing inside the curly braces with the text you have in a variable name:
+
+```r
+"Hey {variable}, You're so awesome"
+```
+
+## `pkg::fun` - why the `::`?
+
+You might have noticed that I wrote:
+
+```r
+cli::cli_inform
+```
+
+Instead of 
+
+```r
+library(cli)
+cli_inform
+```
+
+One of the major shifts from writing R code and analyses to writing R packages is how you interact with other R packages you want to use.
+
+Normally, in an R script, when you want to use a function from, say, `dplyr`, you use `library(dplyr)`.
+
+However, we **do not ever** want to call `library(dplyr)` inside a function in an R package. The reason is to do with NAMESPACE conflicts. A popular usecase of this is in the `tidyverse` R package - where we get this message when we call `library(tidyverse)`.
+
+```{r}
+library(tidyverse)
+```
+
+The conflict message at the bottom tells us that `dplyr::filter()` masks `stats::filter()`.
+
+This is a key issue with package development - masking. If all R packages called `library(<package>)` on every R package that they depended upon, then we'd have SO MUCH masking. It's almost considered rude or overbearing.
+
+> How do you NOT use library??
+
+You say? The solution is to use what is called the "namespaced" form: `pkg::fun()`.
+
+For example, if I want to use `filter` from `dplyr`, I do so with:
+
+```{r}
+cars |> 
+  dplyr::filter(speed <= 4)
+```
+
+So for every package we want to use a function from in an R package, we use the "namespaced form", e.g., `dplyr::filter()`. We also have to declare the dependencies formally, which I'll discuss in a moment. Right now, I need you to see the errors when you run check, so you can identify this problem yourself later.
+
+So now we need to identify the packages that we use in our R package, and then namespace them. We then formally add the dependency with: `use_package(<pkg>)`.
+
+For example, looking at our praise function, it is in the __namespaced__ form like so:
+
+```r
+praise <- function(name){
+  cli::cli_inform("Hey {name}, You're so awesome!")
+}
+```
+
+
+:::{.callout-tip, title="Your Turn: run `devtools::check()"}
+
+1. Update your R code to look like the following:
+
+```r
+praise <- function(name){
+  cli::cli_inform("Hey {name}, You're so awesome!")
+}
+```
+
+2. run: `devtools::check()`
+3. Identify the error
+4. Fix this with `use_package("cli")`
+
+:::
+
+## Error: there is no package called 'pkg'
+
+We get this error and warning related to `cli`:
+
+```
+── R CMD check results ───────────────────── praiseme 0.0.0.9000 ────
+Duration: 4.1s
+
+❯ checking examples ... ERROR
+  Running examples in ‘praiseme-Ex.R’ failed
+  The error most likely occurred in:
+  
+  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+  > ### Name: praise
+  > ### Title: Deliver Praise
+  > ### Aliases: praise
+  > 
+  > ### ** Examples
+  > 
+  > praise(person = "Nick")
+  Error in loadNamespace(x) : there is no package called ‘cli’
+  Calls: praise ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+  Execution halted
+
+❯ checking dependencies in R code ... WARNING
+  '::' or ':::' import not declared from: ‘cli’
+
+1 error ✖ | 1 warning ✖ | 0 notes 
+```
+
+This all stems from this warning:
+
+```
+❯ checking dependencies in R code ... WARNING
+  '::' or ':::' import not declared from: ‘cli’
+```
+
+This says we need to declare importing the `cli` package. To do that we use the `use_package()` function.
+
+## `use_package(<pkg>) and `pkg::fun()`
+
+So, we need to give special instructions to our R package so it knows to depend on the `cli` package. We do so with the `use_package()` function:
+
+```r
+use_package("cli")
+```
+
+Which gives us a nice chatty response from `usethis`:
+
+```
+✔ Adding cli to Imports field in DESCRIPTION.
+☐ Refer to functions with `cli::fun()`.
+```
+
+
+::: {.callout-note title="Your turn"}
+
+1. Ensure you have `cli::cli_inform(...)`
+1. call `use_package(cli)`
+
+:::
+
+If you look at the DESCRIPTION file, you'll see this new `Imports` field:
+
+```dcf
+Package: praiseme
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    cli
+```
+
+The `Imports` field is where R lists the R package it depends upon. This is so when you install this package, R can also make sure you have those packages installed.
+
+::: {.callout-tip title="How many dependencies should you have?"}
+
+My opinion is you should depend on as many R packages as you like! It's far faster, I think, to depend on packages that get the job done, and then maybe later trim back some dependencies and rewrite code. 
+
+My reasoning is that it is (generally) really cheap to add dependencies, but more expensive (for my brain), to write them from scratch. 
+
+So, be greedy, add dependencies, then prune back.
+
+::: 
+
+- Add tests for behaviour with snapshots - get this to fail once to demonstrate the importance of setting seed
+- Add tests that it returns text
+
+- Other future extensions
+ - Adding `praise` to startup
+ - Randomly add a nice synonym
+ - Choose a random phrase
+ - Add progress bars to demonstrate thinking
+- use git and github to get it online
+- add a README
+- Use Git and GitHub to put your R package online.
+  - git + github motivation
+  - git installation time
+  - use_git()
+  - use_github()
+- Understand next steps for advanced package development, including:
+	- Automatically run tests with continuous integration via GitHub Actions.
+	  - use_github_action()
+	- Create professional package websites using `pkgdown`.
+	  - `use_pkgdown_github_pages()`
+	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
+	  - showcase
+
+Let's make it that we can use a name 
+ tldrlegal https://tldrlegal.com/ What is the folder structure? What are we even looking at? Run devtools::check() They could submit this right now!
+
+## The workflow of package development
+
+One of the major workflows during R package development is this:
+
+1.  Edit R functions
+2.  `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
+3.  Edit R functions.
+
+::: {.callout-tip title="Cheatsheets" collapse="true"}
+There is a great [cheatsheet for package development](https://rstudio.github.io/cheatsheets/html/package-development.html) that I had stapled to my cubicle wall during my PhD. The website now is very useful, but make sure to check out [the PDF](https://rstudio.github.io/cheatsheets/package-development.pdf).
+:::
+
+Let's try out our R package. To do this, I'm going to recommend you create a special R file, sometimes called a "scratch file". It lives inside a folder called `inst`, which is typically not touched by R package building. This is a useful trick if you want to have a way to play around with some R code, keeping it inside your R package.
+
+::: {.callout-note title="Workflow ideas: a scratch file" collapse="true"}
+Sometimes you want to have a little scratch pad to write all your practice code. One place where you can do this is in a "scratch" file.
+
+Create a scratch file:
+
+1.  Create a directory `inst`
+2.  Inside that directory, create an R file called `scratch.R` (note that this can actually be called anything, but `scratch.R` is what I use)
+3.  Write `library(praiseme)` inside `scratch.R`
+:::
+
+Does this work for you?
+
+Let's pick this up in the next section, "How to use extra packages"
+
+
+## Demo in `scratch`
+
+Now that we've done this, let's install the package, and then go to `scratch.R`
+
+I then get this error:
+
+```
+> clean_education_data(raw_education_2014)
+Error in clean_education_data(raw_education_2014) : 
+  could not find function "clean_education_data"
+```
+
+However, if we do load all, with:
+
+```r
+load_all(".")
+```
+
+Then it works!
+
+But what gives with the function not being available? Let's have a look inside `learned` by using `::`:
+
+There's nothing in there! Now let's focus on getting that working, which will involve learning about **documenting our code!**
+
+
+::: {.callout-caution title="The `tidyverse` package is not a dependency in packages" collapse="true"}
+
+Because the purpose of the R package `tidyverse` is only really to load other R packages, it does not contain functions. Don't put `tidyverse` in imports.
+
+:::
+
+
+::: {.callout-tip title="Managing conflicts in scripts with `conflicted`" collapse="true"}
+Outside of the R package development world, it's a good idea to proactively manage function conflicts. Lest you use `stats::filter()` instead of `dplyr::filter()` 
+
+See the [`conflicted` R package](https://github.com/r-lib/conflicted) for more on this idea.
+:::
+
+::: {.callout-tip title="Imports vs Depends, pkg versions" collapse="true"}
+- Imports vs Depends. We only really use Imports. Don't use Depends unless you're building an extension package, e.g., something that works with ggplot2, where it doesn't make sense to have the package without ggplot2. Depends is like having `library(pkg)`. Generally, don't do it.
+- It's usually a good idea to state package versions after their name in Imports. Find out the package name with `packageVersion("pkg")`. Generally onlt do `>=`, and not `==` and never `<`
+:::
+

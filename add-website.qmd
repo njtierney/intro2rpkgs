@@ -1,0 +1,14 @@
+## Adding a website
+
+We've got our package written! Now let's make it even more attractive to users by making a fancy website.
+
+This has now been made so easy thanks to `pkgdown`. Essentially, you run:
+
+```r
+`use_pkgdown_github_pages()`
+```
+
+## Package website tips
+
+- look at other packages for inspiration on structure
+- try to use a different default theme

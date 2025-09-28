@@ -1,0 +1,58 @@
+## Adding a README file
+
+Now that we've got our package onto github, let's add a nice landing page, in the form of a README file.
+
+A README for a package should aim to answer the following questions:
+
+- What is your package?
+- Why should we use it?
+- How do we use it?
+
+We can set up the README with the following command:
+
+```r
+use_readme_rmd()
+```
+
+Which tells us the following:
+
+```
+✔ Writing README.Rmd.
+✔ Adding "^README\\.Rmd$" to .Rbuildignore.
+☐ Modify README.Rmd.
+✔ Writing .git/hooks/pre-commit.
+```
+
+Essentially this means:
+
+- Don't add the README.Rmd when building the package
+- Remember to edit the .Rmd (not the md file it creates)
+- Adds a little note that will not let you just commit the README.Rmd unless the README.md has been updated (this is called a pre-commit).
+
+[Here's a commit of this](https://github.com/njtierney/learned/pull/2/commits/0ce4e30647d2ea86f010c49a21df196e9c374fb1)
+
+Essentially, the README.Rmd file allows us to demonstrate our package - in a similar way to how we have a vignette. 
+
+Some good examples of R package READMEs:
+
+- [`dplyr`](https://github.com/tidyverse/dplyr?tab=readme-ov-file#dplyr-)
+- [`datapasta`](https://github.com/MilesMcBain/datapasta)
+- [`skimr`](https://github.com/ropensci/skimr?tab=readme-ov-file#skimr-)
+- [`magick`](https://github.com/ropensci/magick?tab=readme-ov-file#ropensci-the-magick-package)
+- [`visdat`](https://github.com/ropensci/visdat?tab=readme-ov-file#visdat-)
+
+### How to write the README, though?
+
+Writing documentation can be a bit hard, but here are some general tips:
+
+- Take the vignette, make it smaller.
+- Take the examples, put them in there.
+- Remember that done is better than perfect.
+
+Here's [my (quick) commit](https://github.com/njtierney/learned/pull/2/commits/4be9bc46099156efe44d4f7b6d50de5a399ed4f4) of making a minimal README.Rmd
+
+::: {.callout-tip title="A common pitfall with README.Rmd"}
+- Remember to add `library(pkg)` to your README
+- Remember to build the package before you knit!
+  - You can do this with `build_readme()` (which builds the package and knits the README file)
+:::
