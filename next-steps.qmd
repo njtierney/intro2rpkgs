@@ -1,14 +1,13 @@
 ## Next Steps
 
-- Understand next steps for advanced package development, including:
-	- Automatically run tests with continuous integration via GitHub Actions.
-	  - use_github_action()
-	- Create professional package websites using `pkgdown`.
-	  - `use_pkgdown_github_pages()`
-	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
-	  - showcase
+You've got your R package built, and while it is simple, it does contain all the core pieces of an R package! Here are some next steps that I would recommend you pursue to make your R package even better.
 
-## Using Continuous Integration
+- Use continuous integration, so every code push runs checks and tests
+- Add a website with pkgdown
+- Put your R package on the R Universe
+- Put your package on CRAN
+
+### Using Continuous Integration
 
 It's nice to run tests and checks locally, but we can actually set things up to happen automatically every time we push to GitHub.
 
@@ -21,15 +20,12 @@ use_github_action()
 
 And follow the prompts
 
-
 - This is all much easier than it used to be
-- Explain that there is a game of "watching the green lights"
-- Explain test coverage
-  - see `covr::report()`
+- There is a bit of a game of "watching the green lights"
+- Add test coverage
+  - see `covr::report()` for a local version
 
-
-
-## Adding a website
+## Adding a website with pkgdown
 
 We've got our package written! Now let's make it even more attractive to users by making a fancy website.
 
@@ -39,20 +35,33 @@ This has now been made so easy thanks to `pkgdown`. Essentially, you run:
 `use_pkgdown_github_pages()`
 ```
 
-## Package website tips
+And you follow the steps from here.
+
+Some tips for structure your R Package website:
 
 - look at other packages for inspiration on structure
 - try to use a different default theme
-
 
 - R packages book
 - official R docs
 - rOpenSci docs
 - R Package Essentials
 
-Submitting to CRAN
+### R Universe
 
-Submitting to JOSS
+R Universe presents a middle ground between your package on github, and your package on CRAN.
 
-Submitting to rOpenSci
+- See https://r-universe.dev/search
+- Similar to CRAN - you get speed of builds thanks to binary builds.
+- Linked to your github
+- Fewer barriers to entry
+- Learn more at https://docs.r-universe.dev/publish/set-up.html
+  
+### Publish to CRAN
 
+Before you publish on CRAN, you will need to go through some more hoops. I would recommend at least skim reading the R packages book: https://r-pkgs.org/
+
+- A few barriers
+- very stable, fast
+- Requires constant maintenance from you - usually need to respond to CRAN requests within 2 weeks
+- I would recommend reading https://r-pkgs.org/release.html

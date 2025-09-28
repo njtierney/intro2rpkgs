@@ -51,17 +51,15 @@ book:
     - "use-check.qmd"
     - "how-to-use-extra-pkgs.qmd" # lots of extra work
     - "use-tests.qmd"
-    - "push-to-github.qmd" 
+    - "push-online.qmd" 
     - "add-readme.qmd"
     - "next-steps.qmd"
-    - "publish.qmd" # on R universe
-    - "next-steps.qmd" # R-Packages book, rOpenSci, AI tools
-    - "references.qmd"
-    - "acknowledgements.qmd"
+    # - "references.qmd"
+    # - "acknowledgements.qmd"
   appendices:
-    - "appendix-faq.qmd"
-    - "common-problems.qmd"
-    - "keyboard-shortcuts.qmd"
+    # - "appendix-faq.qmd"
+    # - "common-problems.qmd"
+    # - "keyboard-shortcuts.qmd"
 bibliography:
   - book.bib
 
