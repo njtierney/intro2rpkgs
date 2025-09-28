@@ -56,7 +56,7 @@ book:
     - "next-steps.qmd"
     # - "references.qmd"
     # - "acknowledgements.qmd"
-  appendices:
+  # appendices:
     # - "appendix-faq.qmd"
     # - "common-problems.qmd"
     # - "keyboard-shortcuts.qmd"

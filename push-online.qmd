@@ -1,0 +1,92 @@
+## Pushing it online
+
+We've got all this locally, and that's great, now it is time to share it with the world!
+
+If all went well with [installation](installation), then there are two steps to making this available publicly.
+
+1. Set up git
+2. Push to github
+
+## `use_git()`
+
+We can establish a git repository with:
+
+```r
+use_git()
+```
+
+Which does:
+
+- initialise a git repository
+- asks you to commit files
+- other setup
+- May ask you to restart RStudio to establish the git pane
+
+:::{.callout-note title="Demo: Using git"}
+
+- Make a small change to the praise function to change the compliment used.
+- Unpack the git pane
+- Unpack diff changes
+
+:::
+
+:::{.callout-tip title="Your Turn: `use_git()`"}
+
+1. Run `usethis::use_git()` and follow prompts
+1. Explore the git pane
+1. Explore making changes to files and seeing changes in git
+1. Notice that you can commit, but you cannot "push"
+
+:::
+
+
+:::{.callout-note title="Demo: This commit will..."}
+
+- Generally, you want to finish the sentence, "this commit will..." as a way to structure your commit messages.
+- Demo emoji github lookup, so you add fun things like rockets to your commit messages: <https://gist.github.com/rxaviers/7360908>
+
+:::
+
+After git is set up, we want to put it somewhere online. For our use case, we want to use GitHub, but other alternatives exist, such as [codeberg](https://codeberg.org/), [gitlab](https://about.gitlab.com/), and [bitbucket](https://bitbucket.org/product/).
+
+## `use_github()`
+
+The `usethis` package really does make our lives enormously easier here. They've got a little handy function called `use_github()` which does the following key things:
+
+- ensures the project uses git
+- creates the repo on github
+- pushes it to github
+
+This saves us a bit of time, and honestly, feels like a bit of magic.
+
+::: {.callout-tip title="Demo: Features of GitHub"}
+
+There's a lot of things about github!
+
+ - issues
+ - releases
+ - milestones
+ - projects
+
+What questions do you have about github from here?
+
+:::
+
+## How to use git and github
+
+For the most part, we want to follow this process:
+
+1. Make changes to package
+2. `load_all()`
+3. Ensure it works as expected, through informal/formal testing
+4. Select changes 
+5. Write commit message
+6. Push to github
+
+Remember this phrase: 
+
+> commit early, commit often.
+
+## Up next: README
+
+Up next, let's add a README, so we can share a small example of how to use our package!
