@@ -50,7 +50,7 @@ book:
     - "add-arguments.qmd"
     - "use-check.qmd"
     - "how-to-use-extra-pkgs.qmd" # lots of extra work
-    - "add-tests.qmd"
+    - "use-tests.qmd"
     - "push-to-github.qmd" 
     - "add-readme.qmd"
     - "next-steps.qmd"

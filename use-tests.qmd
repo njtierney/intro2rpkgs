@@ -1,21 +1,22 @@
-
-# Using tests with `testthat`
+## Using tests with `testthat`
 
 As we discussed earlier, one of the main workflows in R will be the following:
 
 1. Edit R functions
 2. `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
-3. Explore how R functions work, do they behave as you expext
+3. Explore how R functions work, do they behave as you expect
 4. Repeat 1-3 until satisfied
 5. Perform `devtools::check()`
 
-Step 3 is this informal approach to clarifying that your code behaves as you expect. You could imagine as your code becomes more complex, you can't always informally check everything in the console. This is where tests come in. Compared to the **informal** approach of checking if the code behaves as you expect, tests are a **formal** way to ensure that your code works as you would expect.
+Step 3 is this informal approach to clarifying that your code behaves as you expect. You could imagine as your code becomes more complex, you can't always informally check everything in the console. This is where tests come in. 
+
+Compared to the **informal** approach of checking if the code behaves as you expect by working in the console, tests are a **formal** way to ensure that your code works as you would expect.
 
 We are going to briefly touch on writing some very simple tests, but overall I think tests give you three benefits:
 
 1. They force you to revisit your own code. In doing so, you review your code to ensure it behaves as you expect, which also presents an opportunity to fix any bugs, or improve how you wrote the original code
-2. They give you freedom to make changes in your code. If you have a well-tested code repository, then you are more or less free to make large scale changes on your code. If your tests fail, then you know you've broken something
-3. Outside confidence from others. If they see htat your code has good tests, then it lends your code to having a high degree of trust.
+2. They give you freedom to make changes in your code. If you have a well-tested code R package, you are more or less free to make large scale changes on your code. If your tests fail, then you know you've broken something
+3. Outside confidence from others. If they see that your code has good tests, then it lends your code to having a high degree of trust.
 
 There are a variety of testing approaches in R, we are going to use the `testthat` package, as it integrates well with `usethis` and `devtools`.
 
@@ -36,7 +37,7 @@ This gives you the following output:
   it for editing.
 ```
 
-This sets up some boilderplate code so you don't have to worry about creating directories like `tests/testthat` and make the other adjustments.
+This sets up some boilerplate code so you don't have to worry about creating directories like `tests/testthat` and make the other adjustments.
 
 Let's follow its advice and add a test with:
 
@@ -61,7 +62,16 @@ test_that("multiplication works", {
 })
 ```
 
-To start, we are going to create two tests. The first test will be one that checks the praise contains the name of the person. We can do this with `expect_message`, which is a function that takes two main arguments, the object, and the expected contents. In our case:
+This test reads as:
+
+> We expect 2*2 to be equal to 4
+
+If you run the test, by running `devtools::test()` in the console, you will see the test output.
+
+
+Let's write a test for our praise functions.
+
+This will check that the praise contains the name of the person. We can do this with `expect_message()`, a function taking two arguments: the object, and the expected contents. In our case:
 
 ```r
 test_that("Praise contains the name of the person", {
@@ -71,7 +81,7 @@ test_that("Praise contains the name of the person", {
 
 This is essentially asking: 
 
-> "Does this praise message contain "Nick" ?"
+> Does this praise message contain "Nick" ?
 
 You can now run `devtools::test()` in the console:
 
@@ -84,7 +94,7 @@ You can now run `devtools::test()` in the console:
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
 ```
 
-:::{.callout-tip, title="Your Turn: add your first test"}
+:::{.callout-tip title="Your Turn: add your first test"}
 
 1. Add a unit test with:
 
@@ -103,6 +113,8 @@ test_that("Praise contains the name of the person", {
   expect_message(praise("Nick"), "Chitra")
 })
 ```
+
+4. (Extension). Explore snapshot testing - see the [vignette, snapshotting](https://testthat.r-lib.org/articles/snapshotting.html), for more information.
 
 :::
 
