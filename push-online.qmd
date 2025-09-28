@@ -47,7 +47,7 @@ Which does:
 
 :::
 
-After git is set up, we want to put it somewhere online. For our use case, we want to use GitHub, but other alternatives exist, such as [codeberg](https://codeberg.org/), [gitlab](https://about.gitlab.com/), and [bitbucket](https://bitbucket.org/product/).
+After git is set up, we want to put it somewhere online. In this instance, we want to use GitHub, but other alternatives exist, such as [codeberg](https://codeberg.org/), [gitlab](https://about.gitlab.com/), and [bitbucket](https://bitbucket.org/product/).
 
 ## `use_github()`
 
