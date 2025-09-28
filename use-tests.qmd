@@ -1,0 +1,34 @@
+
+- Add tests for behaviour with snapshots - get this to fail once to demonstrate the importance of setting seed
+- Add tests that it returns text
+
+- Other future extensions
+ - Adding `praise` to startup
+ - Randomly add a nice synonym
+ - Choose a random phrase
+ - Add progress bars to demonstrate thinking
+- use git and github to get it online
+- add a README
+- Use Git and GitHub to put your R package online.
+  - git + github motivation
+  - git installation time
+  - use_git()
+  - use_github()
+- Understand next steps for advanced package development, including:
+	- Automatically run tests with continuous integration via GitHub Actions.
+	  - use_github_action()
+	- Create professional package websites using `pkgdown`.
+	  - `use_pkgdown_github_pages()`
+	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search).
+	  - showcase
+
+Let's make it that we can use a name 
+ tldrlegal https://tldrlegal.com/ What is the folder structure? What are we even looking at? Run devtools::check() They could submit this right now!
+
+## The workflow of package development
+
+One of the major workflows during R package development is this:
+
+1.  Edit R functions
+2.  `load_all()` (or keyboard shortcut Ctrl/Cmd+Shift+L)
+3.  Edit R functions.
