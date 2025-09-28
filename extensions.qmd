@@ -1,0 +1,13 @@
+## Extension exercises
+
+ - Adding `praise()` function to run on startup via `edit_r_profile()`
+ - Randomly add a nice synonym with the `syn` package
+ - Choose from a set of random phrases (explore the tidyverse blog samples)
+ - Add progress bars to demonstrate thinking
+ 
+## tests
+
+- Add snapshot tests
+- Explore random features of adding sampling and how this interacts
+- get this to fail once to demonstrate the importance of setting seed
+

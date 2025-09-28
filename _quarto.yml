@@ -54,6 +54,7 @@ book:
     - "push-online.qmd" 
     - "add-readme.qmd"
     - "next-steps.qmd"
+    - "extensions.qmd"
     # - "references.qmd"
     # - "acknowledgements.qmd"
   # appendices:
