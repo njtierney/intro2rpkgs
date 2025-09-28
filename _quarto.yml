@@ -29,8 +29,8 @@ book:
     	- Automatically run tests with continuous integration via GitHub Actions.
     	- Make your R package easily installable with the [R Universe](https://r-universe    .dev/search).
     	- Create professional package websites using `pkgdown`.
-  site-url: https://rpkg-intro.njtierney.com
-  repo-url: https://github.com/njtierney/rpkg-intro
+  site-url: https://intro2rpkgs.njtierney.com
+  repo-url: https://github.com/njtierney/intro2rpkgs
   repo-branch: main
   repo-actions: [edit, issue]
   # sharing: [twitter]
@@ -68,7 +68,7 @@ format:
   html:
     theme:
       - cosmo
-      - rpkg-intro.scss
+      - intro2rpkgs.scss
     code-background: true
     code-copy: true
     code-overflow: wrap

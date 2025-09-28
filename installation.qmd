@@ -201,7 +201,7 @@ devtools::dev_sitrep()
   Update them with `devtools::update_packages("devtools")`
 ── dev package ─────────────────────────────────────────────────────────────────────────────
 • package: 'rpkgintro'
-• path: '/Users/nick_1/github/njtierney/rpkg-intro/'
+• path: '/Users/nick_1/github/njtierney/intro2rpkgs/'
 • rpkgintro dependencies out of date:
   'pillar', 'vroom', 'purrr', 'credentials', 'ggplot2', 'gh', 'usethis', 'here'
   Update them with `devtools::install_dev_deps()`
