@@ -104,14 +104,49 @@ require(devtools)
 
 we usually recommend writing `library(devtools)`, but in this instance, `require` is what we want, because if the package is not installed, `require` will throw a warning, rather than an error:
 
-```{r}
-#| error: true
 
+::: {.cell}
+
+```{.r .cell-code}
 # warn
 require(whatevenisthis)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Loading required package: whatevenisthis
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+logical.return = TRUE, : there is no package called 'whatevenisthis'
+```
+
+
+:::
+
+```{.r .cell-code}
 # error
 library(whatevenisthis)
 ```
+
+::: {.cell-output .cell-output-error}
+
+```
+Error in `library()`:
+! there is no package called 'whatevenisthis'
+```
+
+
+:::
+:::
+
 
 We do not want an error when we start R, it is annoying.
 
