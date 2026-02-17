@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://intro2rpkgs.njtierney.com/index.html</loc>
-    <lastmod>2026-02-17T07:36:57.912Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.883Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/license.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.883Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/why-r-pkgs.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/installation.html</loc>
-    <lastmod>2026-02-17T07:36:57.912Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.883Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/rstudio.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/create-the-pkg.html</loc>
-    <lastmod>2026-02-17T07:36:57.857Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.827Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/exporting-and-documenting.html</loc>
-    <lastmod>2026-02-17T07:36:57.857Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.827Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/add-arguments.html</loc>
-    <lastmod>2026-02-17T07:36:57.857Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.827Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/use-check.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/how-to-use-extra-pkgs.html</loc>
-    <lastmod>2026-02-17T07:36:57.870Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.841Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/use-tests.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/push-online.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/add-readme.html</loc>
-    <lastmod>2026-02-17T07:36:57.857Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.827Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/next-steps.html</loc>
-    <lastmod>2026-02-17T07:36:57.913Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.884Z</lastmod>
   </url>
   <url>
     <loc>https://intro2rpkgs.njtierney.com/extensions.html</loc>
-    <lastmod>2026-02-17T07:36:57.857Z</lastmod>
+    <lastmod>2026-02-17T10:18:42.827Z</lastmod>
   </url>
 </urlset>
