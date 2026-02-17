@@ -1,4 +1,3 @@
-
 ## Schedule
 
 This course is structured into 6 parts, each approximately 1 hour long.
@@ -108,11 +107,3 @@ This course is structured into 6 parts, each approximately 1 hour long.
   - Work on your own package ideas
   - Troubleshooting and best practices
   - Resources for continued learning
-
----
-
-Notes:
-- Each part is approximately 1 hour
-- Participants create the {praiseme} package step-by-step
-- Emphasizes hands-on practice following the book materials
-- By the end, you'll have a working, documented, tested package on GitHub

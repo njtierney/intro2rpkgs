@@ -1,5 +1,5 @@
 ---
-title: intro2rpkgs
+title: Introduction to R Package Development
 knitr:
   opts_chunk:
     collapse: true
@@ -14,22 +14,14 @@ format: gfm
 <!-- badges: start -->
 <!-- badges: end -->
 
-# Introduction to R Package Development
-
 Do you have R code you want to share? You can transform your R code into a shareable tool by developing it into an R package. This course bridges the gap between writing isolated R functions and creating documented packages that can be easily distributed, and is designed for those who might be curious about R package development but haven't had the time or guidance to get started.
 
 You'll learn the essential tools of the trade: `usethis` and `devtools` for package structure, `roxygen2` for documentation, `testthat` for testing, and Git/GitHub for sharing your work.
 
 Whether you're looking to organise your personal code collection or contribute to the broader R ecosystem, this course provides the foundation you need.
 
-## Learning outcomes
-
 {{< include outcomes.qmd >}}
 
-## Details
-
 {{< include details.qmd >}}
-
-## Schedule
 
 {{< include schedule.md >}}

@@ -1,4 +1,4 @@
-# intro2rpkgs
+# Introduction to R Package Development
 
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
@@ -6,8 +6,6 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-
-# Introduction to R Package Development
 
 Do you have R code you want to share? You can transform your R code into
 a shareable tool by developing it into an R package. This course bridges
@@ -24,18 +22,14 @@ Whether you’re looking to organise your personal code collection or
 contribute to the broader R ecosystem, this course provides the
 foundation you need.
 
-## Learning outcomes
-
-### Introduction to R packages
-
-**Prerequisites**
+## Prerequisites
 
 - Comfortable with some R fundamentals (data types, functions, reading
   data)
 - Experience writing basic R scripts
 - No prior experience with package development required
 
-**Learning outcomes**
+## Learning outcomes
 
 By the end of this course, you will be able to:
 
@@ -52,13 +46,7 @@ By the end of this course, you will be able to:
     Universe](https://r-universe.dev/search)
   - Create professional package websites using `pkgdown`
 
-**Course website**
-
-<https://intro2rpkgs.njtierney.com>
-
 ## Details
-
-### Introduction to R packages
 
 Do you have R code you want to share? You can transform your R code into
 a shareable tool by developing it into an R package. This course bridges
@@ -74,8 +62,6 @@ testing, and Git/GitHub for sharing your work.
 Whether you’re looking to organise your personal code collection or
 contribute to the broader R ecosystem, this course provides the
 foundation you need.
-
-## Schedule
 
 ## Schedule
 
@@ -186,10 +172,3 @@ This course is structured into 6 parts, each approximately 1 hour long.
   - Work on your own package ideas
   - Troubleshooting and best practices
   - Resources for continued learning
-
-------------------------------------------------------------------------
-
-Notes: - Each part is approximately 1 hour - Participants create the
-{praiseme} package step-by-step - Emphasizes hands-on practice following
-the book materials - By the end, you’ll have a working, documented,
-tested package on GitHub

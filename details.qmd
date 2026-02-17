@@ -1,4 +1,4 @@
-### Introduction to R packages
+## Details
 
 Do you have R code you want to share? You can transform your R code into a shareable tool by developing it into an R package. This course bridges the gap between writing isolated R functions and creating documented packages that can be easily distributed, and is designed for those who might be curious about R package development but haven't had the time or guidance to get started.
 

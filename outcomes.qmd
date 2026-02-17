@@ -1,12 +1,10 @@
-### Introduction to R packages
-
-**Prerequisites**
+## Prerequisites
 
 - Comfortable with some R fundamentals (data types, functions, reading data)
 - Experience writing basic R scripts
 - No prior experience with package development required
 
-**Learning outcomes**
+## Learning outcomes
 
 By the end of this course, you will be able to:  
   
@@ -20,6 +18,3 @@ By the end of this course, you will be able to:
 	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search)
 	- Create professional package websites using `pkgdown`
 
-**Course website**
-
-<https://intro2rpkgs.njtierney.com>
