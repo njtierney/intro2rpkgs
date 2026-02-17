@@ -1,0 +1,25 @@
+### Introduction to R packages
+
+**Prerequisites**
+
+- Comfortable with some R fundamentals (data types, functions, reading data)
+- Experience writing basic R scripts
+- No prior experience with package development required
+
+**Learning outcomes**
+
+By the end of this course, you will be able to:  
+  
+- Create the basic structure of an R package
+- Manage dependencies with `usethis` and `devtools`
+- Create documentation with `roxygen2`
+- Write and run unit tests with `testthat` to verify package functionality
+- Use Git and GitHub to put your R package online
+- Understand next steps for advanced package development, including:
+	- Automatically run tests with continuous integration via GitHub Actions
+	- Make your R package easily installable with the [R Universe](https://r-universe.dev/search)
+	- Create professional package websites using `pkgdown`
+
+**Course website**
+
+<https://intro2rpkgs.njtierney.com>

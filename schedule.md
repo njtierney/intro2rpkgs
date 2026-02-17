@@ -1,81 +1,3 @@
-# intro2rpkgs
-
-
-<!-- README.md is generated from README.qmd. Please edit that file -->
-
-<!-- badges: start -->
-
-<!-- badges: end -->
-
-# Introduction to R Package Development
-
-Do you have R code you want to share? You can transform your R code into
-a shareable tool by developing it into an R package. This course bridges
-the gap between writing isolated R functions and creating documented
-packages that can be easily distributed, and is designed for those who
-might be curious about R package development but haven’t had the time or
-guidance to get started.
-
-You’ll learn the essential tools of the trade: `usethis` and `devtools`
-for package structure, `roxygen2` for documentation, `testthat` for
-testing, and Git/GitHub for sharing your work.
-
-Whether you’re looking to organise your personal code collection or
-contribute to the broader R ecosystem, this course provides the
-foundation you need.
-
-## Learning outcomes
-
-### Introduction to R packages
-
-**Prerequisites**
-
-- Comfortable with some R fundamentals (data types, functions, reading
-  data)
-- Experience writing basic R scripts
-- No prior experience with package development required
-
-**Learning outcomes**
-
-By the end of this course, you will be able to:
-
-- Create the basic structure of an R package
-- Manage dependencies with `usethis` and `devtools`
-- Create documentation with `roxygen2`
-- Write and run unit tests with `testthat` to verify package
-  functionality
-- Use Git and GitHub to put your R package online
-- Understand next steps for advanced package development, including:
-  - Automatically run tests with continuous integration via GitHub
-    Actions
-  - Make your R package easily installable with the [R
-    Universe](https://r-universe.dev/search)
-  - Create professional package websites using `pkgdown`
-
-**Course website**
-
-<https://intro2rpkgs.njtierney.com>
-
-## Details
-
-### Introduction to R packages
-
-Do you have R code you want to share? You can transform your R code into
-a shareable tool by developing it into an R package. This course bridges
-the gap between writing isolated R functions and creating documented
-packages that can be easily distributed, and is designed for those who
-might be curious about R package development but haven’t had the time or
-guidance to get started.
-
-You’ll learn the essential tools of the trade: `usethis` and `devtools`
-for package structure, `roxygen2` for documentation, `testthat` for
-testing, and Git/GitHub for sharing your work.
-
-Whether you’re looking to organise your personal code collection or
-contribute to the broader R ecosystem, this course provides the
-foundation you need.
-
-## Schedule
 
 ## Schedule
 
@@ -85,7 +7,7 @@ This course is structured into 6 parts, each approximately 1 hour long.
 
 - Why write an R package?
   - R packages as portable code containers
-  - The “laundry basket” analogy
+  - The "laundry basket" analogy
   - Sharing code beyond copy-paste and email
   - Packages for personal use vs public sharing
 - Installation and setup
@@ -95,7 +17,7 @@ This course is structured into 6 parts, each approximately 1 hour long.
   - Setting up your development environment
 - Introduction to the {praiseme} package
   - Our teaching package modeled on {praise}
-  - What we’ll build together
+  - What we'll build together
   - Overview of the package development workflow
 
 ### Part 2: Creating Your First Package
@@ -187,9 +109,10 @@ This course is structured into 6 parts, each approximately 1 hour long.
   - Troubleshooting and best practices
   - Resources for continued learning
 
-------------------------------------------------------------------------
+---
 
-Notes: - Each part is approximately 1 hour - Participants create the
-{praiseme} package step-by-step - Emphasizes hands-on practice following
-the book materials - By the end, you’ll have a working, documented,
-tested package on GitHub
+Notes:
+- Each part is approximately 1 hour
+- Participants create the {praiseme} package step-by-step
+- Emphasizes hands-on practice following the book materials
+- By the end, you'll have a working, documented, tested package on GitHub
